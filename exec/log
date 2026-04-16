@@ -1,0 +1,24 @@
+13817 close(3)                          = 0
+13817 close(3)                          = 0
+13818 dup2(4, 1)                        = 1
+13818 close(3 <unfinished ...>
+13819 dup2(3, 0 <unfinished ...>
+13817 close(3)                          = 0
+13817 close(4 <unfinished ...>
+13818 close(4 <unfinished ...>
+13817 close(5 <unfinished ...>
+13818 close(5 <unfinished ...>
+13817 close(6 <unfinished ...>
+13818 close(6 <unfinished ...>
+13820 dup2(5, 0 <unfinished ...>
+13819 dup2(6, 1 <unfinished ...>
+13820 close(3 <unfinished ...>
+13819 close(3 <unfinished ...>
+13820 close(4 <unfinished ...>
+13819 close(4 <unfinished ...>
+13820 close(5 <unfinished ...>
+13819 close(5 <unfinished ...>
+13820 close(6 <unfinished ...>
+13819 close(6 <unfinished ...>
+13820 dup2(3, 1)                        = 1
+13820 close(3 <unfinished ...>
