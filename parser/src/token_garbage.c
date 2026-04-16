@@ -3,58 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_garbage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/16 15:24:50 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/16 19:13:31 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-
-
-//int		index_to_next_delimeter(char *line, int index)
-//{
-//	while (line[index] == ' ')
-//		index++;
-//	if (line[index] == '<' || line[index] == '>')
-//	{
-//		while (check_delimeters(line[index]) == 1)
-//			index++;
-//		if (line[index] == '\'' || line[index] == '"')
-//			index = index_to_char(line + index + 1, line[index]);
-//		else
-//		{
-//			while (check_delimeters(line[index]) == 0)
-//				index++;
-//		}
-//	}
-//	else if (line[index] == '\'' || line[index] == '"')
-//		index = move_over_quotes(line, index);
-//	else if (line[index] == '|')
-//		index++;
-//	else
-//	{
-//		while (check_delimeters(line[index]) == 0)
-//			index++;
-//	}
-//	return (index);
-//}
-
-//int		move_over_quotes(char *line, int index)
-//{
-//	char	c_to_find;
-	
-//	c_to_find = line[index];
-//	if (line[index] != '\0')
-//		index++;
-//	while (line[index] != '\0' && line[index] != c_to_find)
-//		index++;
-//	if (line[index] != '\0')
-//		index++;
-//	// printf("yowpindex = %s\n", line + index);
-//	return (index);
-//}
+#include "minishell.h"
 
 t_token	*tokenize_input(t_data *d, char *str)
 {
@@ -115,5 +71,11 @@ char	*get_line(void)
 	line = readline("you are a cog>");
 	if (line[0] == '\0')
 		return (free(line), NULL);
+	if (line == NULL)
+	{
+		rl_clear_history();
+		//sluit ales wat geinitialiseerd is
+		exit(0);
+	}
 	return (line);
 }

@@ -52,7 +52,6 @@ BUILTINS_SRC_FILE_E := \
 	unset.c
 
 SRC_FILES_P := \
-	ft_helpers.c \
 	loop_shell.c \
 	token_funcs.c \
 	token_garbage.c

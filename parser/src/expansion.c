@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/16 15:44:10 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/16 19:12:16 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "parser.h" 
+#include "minishell.h" 
 
 void	check_expansions(t_data *d)
 {
@@ -118,37 +118,37 @@ bool	replace_key_in_line(t_data *d, char *value, int start, int val_len, int key
 	return (true);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	const unsigned char	*ucs1;
-	const unsigned char	*ucs2;
-	size_t				i;
+//int	ft_strncmp(const char *s1, const char *s2, size_t n)
+//{
+//	const unsigned char	*ucs1;
+//	const unsigned char	*ucs2;
+//	size_t				i;
 
-	i = 0;
-	ucs1 = (const unsigned char *)s1;
-	ucs2 = (const unsigned char *)s2;
-	while ((ucs1[i] || ucs2[i]) && i < n)
-	{
-		if (ucs1[i] != ucs2[i])
-			return (ucs1[i] - ucs2[i]);
-		i++;
-	}
-	return (0);
-}
+//	i = 0;
+//	ucs1 = (const unsigned char *)s1;
+//	ucs2 = (const unsigned char *)s2;
+//	while ((ucs1[i] || ucs2[i]) && i < n)
+//	{
+//		if (ucs1[i] != ucs2[i])
+//			return (ucs1[i] - ucs2[i]);
+//		i++;
+//	}
+//	return (0);
+//}
 
-char *ft_getenv(t_data *data, char *var)
-{
-	int		i;
-	size_t	len;
+//char *ft_getenv(t_data *data, char *var)
+//{
+//	int		i;
+//	size_t	len;
 
-	i = 0;
-	len = ft_strlen(var);
-	while (data->envp[i] != NULL)
-	{
-		if (ft_strncmp(data->envp[i], var, len) == 0\
-&& data->envp[i][len] == '=')
-			return (data->envp[i] + len + 1);
-		i++;
-	}
-	return (NULL);
-}
+//	i = 0;
+//	len = ft_strlen(var);
+//	while (data->envp[i] != NULL)
+//	{
+//		if (ft_strncmp(data->envp[i], var, len) == 0\
+//&& data->envp[i][len] == '=')
+//			return (data->envp[i] + len + 1);
+//		i++;
+//	}
+//	return (NULL);
+//}

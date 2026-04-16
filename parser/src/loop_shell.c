@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   loop_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/16 14:09:01 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/16 19:12:57 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 static char	*stringify_enum(t_token_type token);
 static void	print_tokenized_list(t_data	*data);
@@ -39,6 +39,8 @@ int		main_loop(char	*envp[])
 {
 	t_data	data;
 
+    //signal(SIGINT, handle_sigint); // voor sigint luistere
+	//signal(SIGQUIT, handle_sigquit); // voor sigquit
 	ft_init_data(&data);
 	if (ft_copy_envp(&data, envp) == -1)
 		return (printf("error"));

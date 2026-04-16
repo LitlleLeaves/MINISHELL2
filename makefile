@@ -56,7 +56,6 @@ BUILTINS_SRC_FILES_E := \
 
 # parser sources
 SRC_FILES_P := \
-	ft_helpers.c \
 	loop_shell.c \
 	token_funcs.c \
 	token_garbage.c
