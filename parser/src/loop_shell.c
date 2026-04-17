@@ -19,7 +19,8 @@ static void	print_tokenized_list(t_data	*data);
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	argc = 0;
+	if (argc != 1)
+		return (10);
 	argv[0] = 0;
 	main_loop(envp);
 	return (0);

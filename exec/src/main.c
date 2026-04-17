@@ -13,28 +13,31 @@
 #include "exec.h"
 
 //parent process waits for all children to finish, and returns the exit status of the last one
-static int	ft_wait_all_children(t_data *data, int nmb_of_pipes)
+static int ft_wait_all_children(t_data *data, int nmb_of_pipes)
 {
-	int	i;
-	int	status;
+    int   i;
+    int   status;
+    pid_t last_pid;
+    int   last_status = 0;
 
-	i = 0;
-	status = 0;
-	while (i < nmb_of_pipes + 1)
-	{
-		printf("childs created: %d\n", data->pids[i]);
-		i++;
-	}
-	i = 0;
-	while (i < nmb_of_pipes + 1)
-	{
-		waitpid(data->pids[i], &status, 0);
-		printf("child %d exited with status %d\n", data->pids[i], WEXITSTATUS(status));
-		i++;
-	}
-	data->exit_code = WEXITSTATUS(status);
-	return (WEXITSTATUS(status));
-	// ft_relative_executable_help(command); //?
+    last_pid = data->pids[nmb_of_pipes];
+
+    i = 0;
+    while (i < nmb_of_pipes + 1)
+    {
+        pid_t pid = waitpid(data->pids[i], &status, 0);
+        // if (pid == -1)
+        // {
+        //     
+        // }
+        if (pid == last_pid)
+            last_status = status;
+        i++;
+    }
+    if (WIFEXITED(last_status))
+		data->exit_code = WEXITSTATUS(last_status);
+	fprintf(stderr, "exitcode is: %i\n", data->exit_code);
+	return (data->exit_code);
 }
 
 //fork a proces for each command

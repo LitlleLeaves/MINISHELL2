@@ -40,7 +40,7 @@ SRC_FILES_E := \
 	free.c \
 	ft_itoa.c \
 	heredoc.c \
-	expansion.c
+
 
 # builtins sources
 BUILTINS_SRC_FILES_E := \
@@ -58,7 +58,8 @@ BUILTINS_SRC_FILES_E := \
 SRC_FILES_P := \
 	loop_shell.c \
 	token_funcs.c \
-	token_garbage.c
+	token_garbage.c \
+	expansion.c
 
 # object files
 OBJS_E := $(addprefix $(OBJ_DIR_E)/, $(SRC_FILES_E:.c=.o) $(BUILTINS_SRC_FILES_E:.c=.o))

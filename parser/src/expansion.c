@@ -56,16 +56,19 @@ char	*get_key(char *line, int start)
 
 bool	convert_expansions(t_data *d, int start)
 {
-	int		index;
 	char	*key;
 	char	*value;
 	int		length;
 	int		key_length;
+	bool	check;
 
-	index = 0;
 	start++;
 	if (d->line[start] == '?')
-		return (replace_key_in_line(d, ft_itoa(d->exit_val), start - 1, 1, 2));
+	{
+		value = ft_itoa(d->exit_code);
+		check = replace_key_in_line(d, value, start - 1, ft_strlen(value), 2);
+		return (free(value), check);
+	}
 	key = get_key(d->line, start);
 	key_length = ft_strlen(key);
 	value = ft_getenv(d, key);
@@ -93,7 +96,7 @@ bool	replace_key_in_line(t_data *d, char *value, int start, int val_len, int key
 	val_index = 0;
 	index = 0;
 	old_len = ft_strlen(d->line);
-	len_diff = (val_len - key_len) - 1;
+	len_diff = (val_len - key_len) /*- 1*/;
 	if (key_len == old_len && !value)
 		return (false);
 	tot_len = len_diff + old_len;
@@ -117,38 +120,3 @@ bool	replace_key_in_line(t_data *d, char *value, int start, int val_len, int key
 	d->line = new;
 	return (true);
 }
-
-//int	ft_strncmp(const char *s1, const char *s2, size_t n)
-//{
-//	const unsigned char	*ucs1;
-//	const unsigned char	*ucs2;
-//	size_t				i;
-
-//	i = 0;
-//	ucs1 = (const unsigned char *)s1;
-//	ucs2 = (const unsigned char *)s2;
-//	while ((ucs1[i] || ucs2[i]) && i < n)
-//	{
-//		if (ucs1[i] != ucs2[i])
-//			return (ucs1[i] - ucs2[i]);
-//		i++;
-//	}
-//	return (0);
-//}
-
-//char *ft_getenv(t_data *data, char *var)
-//{
-//	int		i;
-//	size_t	len;
-
-//	i = 0;
-//	len = ft_strlen(var);
-//	while (data->envp[i] != NULL)
-//	{
-//		if (ft_strncmp(data->envp[i], var, len) == 0\
-//&& data->envp[i][len] == '=')
-//			return (data->envp[i] + len + 1);
-//		i++;
-//	}
-//	return (NULL);
-//}

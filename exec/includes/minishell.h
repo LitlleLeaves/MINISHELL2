@@ -72,7 +72,6 @@ typedef struct s_data
 	int		level;
     /* parser-related */
     int     shell_level;
-    int     exit_val;
     t_token *current;
 }   t_data;
 
@@ -192,7 +191,7 @@ int handle_heredoc(t_token *head, t_data *data);
 void ft_close_heredoc_fds(t_token *head);
 
 /* expansions (parser + exec) */
-char    *check_expansions(t_data *data);
+void	check_expansions(t_data *d);
 bool    convert_expansions(t_data *d, int start);
 char    *get_key(char *line, int start);
 bool    replace_key_in_line(t_data *d, char *value, int start, int val_len, int key_len);
