@@ -8,7 +8,7 @@
 ################################################################################
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g -I exec/includes -I parser/includes
+CFLAGS := -Wall -Wextra -Werror -g -I exec/includes
 
 NAME := minishell
 

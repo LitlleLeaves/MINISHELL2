@@ -31,7 +31,7 @@ static char	*ft_zero_helper(void)
 {
 	char	*str;
 
-	str = malloc(sizeof(char) * 2);
+	str = ft_calloc(sizeof(char) , 2);
 	if (str == NULL)
 		return (NULL);
 	str[0] = '0';
@@ -50,7 +50,7 @@ char	*ft_itoa(int n)
 	len = ft_number_length(num);
 	if (num == 0)
 		return (ft_zero_helper());
-	str = malloc(sizeof(char) * len + 1);
+	str = ft_calloc(sizeof(char) , len + 1);
 	if (str == NULL)
 		return (NULL);
 	str[len--] = '\0';

@@ -49,6 +49,7 @@ char	*get_key(char *line, int start)
 			line[start +index] != '"' && line[start +index] != '\'')
 		index++;
 	key = ft_substr(line, start, index);
+	fprintf(stderr, "key = %s\n", key);
 	if (!key)
 		return (printf("error in getkey\n"), NULL);
 	return (key);
@@ -72,6 +73,7 @@ bool	convert_expansions(t_data *d, int start)
 	key = get_key(d->line, start);
 	key_length = ft_strlen(key);
 	value = ft_getenv(d, key);
+	free(key);
 	if (!value)
 	{
 		if (replace_key_in_line(d, NULL, start - 1, 0, key_length) == false)
@@ -96,11 +98,11 @@ bool	replace_key_in_line(t_data *d, char *value, int start, int val_len, int key
 	val_index = 0;
 	index = 0;
 	old_len = ft_strlen(d->line);
-	len_diff = (val_len - key_len) /*- 1*/;
+	len_diff = (val_len - key_len) - 1;
 	if (key_len == old_len && !value)
 		return (false);
 	tot_len = len_diff + old_len;
-	new = malloc(tot_len + 1);
+	new = ft_calloc(tot_len + 1, sizeof(char));
 	if (!new)
 		return (printf("mallocerror\n"), false);
 	while (index < start)
@@ -115,8 +117,9 @@ bool	replace_key_in_line(t_data *d, char *value, int start, int val_len, int key
 		new[index] = d->line[index - len_diff];
 		index++;
 	}
-	new[index] = '\0';
+	// new[index] = '\0';
 	printf("%s\n", new);
+	free(d->line);
 	d->line = new;
 	return (true);
 }

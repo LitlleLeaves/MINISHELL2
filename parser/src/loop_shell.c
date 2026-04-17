@@ -52,7 +52,6 @@ int		main_loop(char	*envp[])
 		{
 			add_history(data.line);
 			check_expansions(&data);
-			// check_expansions(&data);
 			if (data.line == NULL)
 				break ;
 			data.head = tokenize_input(&data, data.line);
