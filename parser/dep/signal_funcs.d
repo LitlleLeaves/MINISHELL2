@@ -1,4 +1,4 @@
-parser/obj/token_funcs.o: parser/src/token_funcs.c \
+parser/obj/signal_funcs.o: parser/src/signal_funcs.c \
   exec/includes/minishell.h
 
 exec/includes/minishell.h:

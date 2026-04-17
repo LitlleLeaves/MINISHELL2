@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/16 15:18:20 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/17 17:20:43 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static int ft_wait_all_children(t_data *data, int nmb_of_pipes)
 	fprintf(stderr, "exitcode is: %i\n", data->exit_code);
 	return (data->exit_code);
 }
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//small check for the exitcode so that we know wether the child exited because of the signal or due to something else
+//if the signal is the reason we should call an exit func 
 
 //fork a proces for each command
 int	ft_fork_process(t_token *head, t_data *data, int nmb_of_pipes)
