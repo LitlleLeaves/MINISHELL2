@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expansion.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/16 19:12:16 by side-lan         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   expansion.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: side-lan <side-lan@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/04/04 17:23:46 by side-lan      #+#    #+#                 */
+/*   Updated: 2026/04/17 14:15:14 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 void	check_expansions(t_data *d)
 {
 	int		index;
-	bool	check;
+	// bool	check;
 
 	index = 0;
 	while (d->line[index] != '\0')
 	{
+
 		if (d->line[index] == '\'')
 		{
 			index++;
@@ -29,9 +30,7 @@ void	check_expansions(t_data *d)
 		}
 		while (d->line[index] == '$')
 		{
-			check = convert_expansions(d, index);
-			if (check == false)
-				index++;
+			convert_expansions(d, index);
 		}
 		index++;
 	}
@@ -76,7 +75,7 @@ bool	convert_expansions(t_data *d, int start)
 	free(key);
 	if (!value)
 	{
-		if (replace_key_in_line(d, NULL, start - 1, 0, key_length) == false)
+		if (replace_key_in_line(d, " ", start - 1, 1, key_length) == false)
 			d->line = NULL;
 		return (printf("invalid key\n"), false);
 	}
@@ -117,7 +116,7 @@ bool	replace_key_in_line(t_data *d, char *value, int start, int val_len, int key
 		new[index] = d->line[index - len_diff];
 		index++;
 	}
-	// new[index] = '\0';
+	new[index] = '\0';
 	printf("%s\n", new);
 	free(d->line);
 	d->line = new;

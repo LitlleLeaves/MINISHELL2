@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   loop_shell.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/16 19:12:57 by side-lan         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   loop_shell.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: side-lan <side-lan@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/18 20:30:48 by side-lan      #+#    #+#                 */
+/*   Updated: 2026/04/17 14:13:06 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		main_loop(char	*envp[])
 			if (data.line == NULL)
 				break ;
 			data.head = tokenize_input(&data, data.line);
+			if (data.head == NULL)
+				continue;
 			data.current = data.head;
 			print_tokenized_list(&data);
 			free(data.line);

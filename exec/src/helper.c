@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   helper.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 12:02:36 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/15 15:16:41 by jjhurry          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   helper.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/10 12:02:36 by jjhurry       #+#    #+#                 */
+/*   Updated: 2026/04/17 13:54:19 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,9 @@ char	*ft_substr(char const *str, int start, int length)
 	if (start > str_len)
 		return (ft_strdup(""));
 	if (start + length > str_len)
-		new = (char *)malloc((str_len - start) + 1);
+		new = (char *)ft_calloc((str_len - start) + 1, sizeof(char));
 	else
-		new = (char *)malloc(length + 1);
+		new = (char *)ft_calloc(length + 1, sizeof(char));
 	if (!new)
 		return (printf("malloc error"), NULL);
 	while (counter < length && str[start + counter] != '\0')
