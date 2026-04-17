@@ -6,10 +6,8 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/17 19:41:08 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:52:55 by side-lan         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
-
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -58,6 +56,8 @@ int		main_loop(char	*envp[])
 			if (data.line == NULL)
 				break ;
 			data.head = tokenize_input(&data, data.line);
+			if (data.head == NULL)
+				continue;
 			data.current = data.head;
 			print_tokenized_list(&data);
 			free(data.line);
