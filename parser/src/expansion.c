@@ -67,7 +67,7 @@ bool	convert_expansions(t_data *d, int start)
 	if (d->line[start] == '?')
 	{
 		value = ft_itoa(d->exit_code);
-		check = replace_key_in_line(d, value, start - 1, ft_strlen(value), 2);
+		check = replace_key_in_line(d, value, start - 1, ft_strlen(value), 1);
 		return (free(value), check);
 	}
 	key = get_key(d->line, start);
