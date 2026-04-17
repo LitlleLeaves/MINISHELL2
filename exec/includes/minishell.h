@@ -19,6 +19,15 @@
 #include <limits.h>
 #include <stdbool.h>
 
+typedef enum e_sig_status
+{
+	INTERACTIVE,  // terwijl je kan type
+	NON_INTERACTIVE, //tijdes execute
+	IGNORE, //als je parent word moet je sigint en sigquit negeren
+	CHILD, //ergens in the child code moet dit gedefineerd worde
+	HEREDOC //heredoc werkt bijna t zelfde als interactive maar geeft een bepaalde exit code (130)
+}			t_sig_status;
+
 typedef enum	e_token_type
 {
     WORD,
@@ -59,20 +68,20 @@ typedef struct s_exec_info
 
 typedef struct s_data
 {
-    /* exec-related */
-    int     **pipes;
-    pid_t   *pids;
-    char    **envp;
-    long    shutdown;
-    int     exit_code;
-    t_token *head;
-    int     nmb_of_pipes;
-    char    *line;
-    int     index;
-	int		level;
-    /* parser-related */
-    int     shell_level;
-    t_token *current;
+	    /* exec-related */
+    int    			 **pipes;
+    pid_t  			 *pids;
+    char   			 **envp;
+    long   			 shutdown;
+    int    			 exit_code;
+    t_token			 *head;
+    int    		 	nmb_of_pipes;
+    char   			 *line;
+    int    			 index;
+	int				level;
+	    /* parser-related */
+    int     		shell_level;
+    t_token 		*current;
 }   t_data;
 
 //main.c
@@ -211,4 +220,6 @@ t_token *if_quotes(t_data *d, char *line, int start);
 /* misc */
 int index_to_char(char *str, char c);
 
+/* signals*/
+void	setup_signals(t_sig_status	type);
 #endif

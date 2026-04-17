@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   loop_shell.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: side-lan <side-lan@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/18 20:30:48 by side-lan      #+#    #+#                 */
-/*   Updated: 2026/04/17 14:13:06 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   loop_shell.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
+/*   Updated: 2026/04/17 19:52:55 by side-lan         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
-
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	*stringify_enum(t_token_type token);
 static void	print_tokenized_list(t_data	*data);
+
+//global voor de signals
+volatile sig_atomic_t signum = 0;
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -40,14 +41,14 @@ int		main_loop(char	*envp[])
 {
 	t_data	data;
 
-    //signal(SIGINT, handle_sigint); // voor sigint luistere
-	//signal(SIGQUIT, handle_sigquit); // voor sigquit
+	setup_signals(INTERACTIVE);
 	ft_init_data(&data);
 	if (ft_copy_envp(&data, envp) == -1)
 		return (printf("error"));
 	while (1)
 	{
 		data.line = get_line();
+		setup_signals(NON_INTERACTIVE);
 		if (data.line && *data.line)
 		{
 			add_history(data.line);

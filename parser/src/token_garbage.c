@@ -6,12 +6,13 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/16 19:13:31 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/17 13:56:15 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//loop door de string en maak de linked list van tokens
 t_token	*tokenize_input(t_data *d, char *str)
 {
 	t_token *head;
@@ -23,7 +24,6 @@ t_token	*tokenize_input(t_data *d, char *str)
 	while (str[d->index] != '\0')
 	{
 		start = d->index;
-		//make the token
 		if (current == NULL)
 		{
 			current = classify_and_make(d, str + start);
@@ -34,13 +34,11 @@ t_token	*tokenize_input(t_data *d, char *str)
 			current->next = classify_and_make(d, str + start);
 			current = current->next;
 		}
-		//printf("%d\n", d->index);
-		//printf("%s\n", d->line);
-		//d->index = index_to_next_delimeter(str, d->index);
 	}
 	return (head);
 }
 
+//bepaald met de delimeters welke token we maken
 t_token	*classify_and_make(t_data *d, char *line)
 {
 	int		index;
@@ -64,18 +62,19 @@ t_token	*classify_and_make(t_data *d, char *line)
 	return (NULL);
 }
 
+//roept getline en checked de return waarde
 char	*get_line(void)
 {
 	char	*line;
 
-	line = readline("you are a cog>");
-	if (line[0] == '\0')
-		return (free(line), NULL);
+	line = readline("Minishell>");
 	if (line == NULL)
 	{
 		rl_clear_history();
-		//sluit ales wat geinitialiseerd is
+		//sluit ales wat geinitialiseerd is wat vgm niks is;
 		exit(0);
 	}
+	if (line[0] == '\0')
+		return (free(line), NULL);
 	return (line);
 }
