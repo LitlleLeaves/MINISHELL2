@@ -3,31 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   loop_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 12:04:40 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 14:41:53 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // static char	*stringify_enum(t_token_type token);
-static void	print_tokenized_list(t_data	*data);
+//static void	print_tokenized_list(t_data	*data);
+static void	ft_init_data(t_data *data);
 
 //global voor de signals
 volatile sig_atomic_t signum = 0;
 
-int	main(int argc, char *argv[], char *envp[])
-{
-	if (argc != 1)
-		return (10);
-	argv[0] = 0;
-	main_loop(envp);
-	return (0);
-}
-
-void	ft_init_data(t_data *data)
+static void	ft_init_data(t_data *data)
 {
 	data->current = NULL;
 	data->head = NULL;
@@ -36,58 +28,83 @@ void	ft_init_data(t_data *data)
 	data->exit_code = 0;
 }
 
-//main loop of te shell
-int		main_loop(char	*envp[])
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	data;
-
-	setup_signals(INTERACTIVE);
+	
+	if (argc != 1)
+		return (10);
+	argv[0] = 0;
 	ft_init_data(&data);
 	if (ft_copy_envp(&data, envp) == -1)
-		return (printf("error"));
-	while (1)
-	{
-		data.line = get_line();
-		setup_signals(NON_INTERACTIVE);
-		if (data.line && *data.line)
-		{
-			add_history(data.line);
-			check_expansions(&data);
-			if (data.line == NULL)
-				break ;
-			data.head = tokenize_input(&data, data.line);
-			if (data.head == NULL)
-				continue;
-			data.current = data.head;
-			print_tokenized_list(&data);
-			free(data.line);
-			if (handle_heredoc(data.head, &data) < 0)
-				return (ft_free_arr((void **)data.envp), ft_free_tokens(data.head), -1);
-			if (ft_start_exec(data.head, &data) < 0)
-				return (ft_free_arr((void **)data.envp), ft_free_tokens(data.head), -1);
-		}
-		if (data.shutdown != -1)
-		{
-			ft_free_arr((void **)data.envp);
-			rl_clear_history();
-			exit(data.exit_code);
-		}
-	}
+		return (printf("errorenvp"));
+	main_loop(&data);
 	ft_free_arr((void **)data.envp);
-	rl_clear_history();	
+	rl_clear_history();
 	return (0);
 }
 
-static void	print_tokenized_list(t_data	*data)
+//main loop of te shell
+int		main_loop(t_data *data)
 {
-	while (data->current != NULL)
+
+	setup_signals(INTERACTIVE);
+	while (1)
 	{
-		if (data->current->value == NULL)
-			data->current = data->current->next;
-		// printf("%s %s\n", data->current->value, stringify_enum(data->current->type));
-		data->current = data->current->next;
+		data->line = get_line();
+		setup_signals(NON_INTERACTIVE);
+		if (data->line && *data->line)
+		{
+			if (get_input(data) == -1)
+				continue ;
+		}
+		if (data->head == NULL)
+			continue ;
+		if (execute_input(data) == -1)
+			return (-1);
+		if (data->shutdown != -1)
+		{
+			ft_free_arr((void **)data->envp);
+			rl_clear_history();
+			exit(data->exit_code);
+		}
 	}
+	return (0);
 }
+
+int	get_input(t_data *data)
+{
+	add_history(data->line);
+	check_expansions(data);
+	if (data->line == NULL)
+		return (-1);
+	data->head = tokenize_input(data, data->line);
+	
+	data->current = data->head;
+	//print_tokenized_list(&data->;
+	free(data->line);
+	return (0);
+}
+
+int	execute_input(t_data *data)
+{
+	if (handle_heredoc(data->head, data) < 0)
+		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head), -1);
+	if (ft_start_exec(data->head, data) < 0)
+		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head), -1);
+	return (0);
+}
+
+//static void	print_tokenized_list(t_data	*data)
+//{
+//	while (data->current != NULL)
+//	{
+//		if (data->current->value == NULL)
+//			data->current = data->current->next;
+//		// printf("%s %s\n", data->current->value, stringify_enum(data->current->type));
+//		data->current = data->current->next;
+//	}
+//}
 
 // static char	*stringify_enum(t_token_type token)
 // {
