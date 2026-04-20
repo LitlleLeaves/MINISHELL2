@@ -1,0 +1,2 @@
+Minishell>< infile << eof cat 1 | cat 2 >> outfile
+> Minishell>
