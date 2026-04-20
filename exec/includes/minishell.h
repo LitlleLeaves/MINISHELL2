@@ -85,6 +85,10 @@ typedef struct s_data
 }   t_data;
 
 //main.c
+int	main(int argc, char *argv[], char *envp[]);
+int		main_loop(t_data *data);
+int	get_input(t_data *data);
+int	execute_input(t_data *data);
 
 int ft_start_exec(t_token *head, t_data *data);
 
@@ -206,7 +210,6 @@ char    *get_key(char *line, int start);
 bool    replace_key_in_line(t_data *d, char *value, int start, int val_len, int key_len);
 
 /* parser-specific */
-int     main_loop(char  *envp[]);
 char    *get_line(void);
 
 /* tokenization helpers */
