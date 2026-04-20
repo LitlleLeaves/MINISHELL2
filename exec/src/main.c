@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/20 14:41:00 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 15:55:13 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ int	ft_fork_process(t_token *head, t_data *data, int nmb_of_pipes)
 	return (1);
 }
 
-void ft_no_word_redirection(t_token *head,t_data *data)
+void ft_no_word_redirection(t_token *head, t_data *data)
 {
 	t_token	*curr;
 	int		in;
 	int		out;
 
+	(void)data; //tijdelijk want word nog niet gebruikt hier
 	curr = head;
 	in = -2;
 	out = -2;

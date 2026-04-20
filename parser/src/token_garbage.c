@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_garbage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 14:06:42 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 15:47:33 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,3 @@ t_token	*classify_and_make(t_data *d, char *line)
 	return (NULL);
 }
 
-//roept getline en checked de return waarde
-char	*get_line(void)
-{
-	char	*line;
-
-	line = readline("Minishell>");
-	if (line == NULL)
-	{
-		rl_clear_history();
-		//sluit ales wat geinitialiseerd is wat vgm niks is;
-		exit(0);
-	}
-	if (line[0] == '\0')
-		return (free(line), NULL);
-	return (line);
-}

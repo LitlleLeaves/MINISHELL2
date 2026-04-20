@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:06:58 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 14:12:59 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:53:39 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	heredoc_handler(int signum)
 void	interactive_handler(int signum)
 {
 	signum = 0;
+	rl_on_new_line();
 	write(1, "^c\n", 4);
-	//print ^c en promt n nieuwe line
+	rl_replace_line("", 0);
+	rl_redisplay();
+
 	//opruimfunctie oproepe die 130 terug geeft
 	printf("ja heel interactive dit\n");
 	exit(130);

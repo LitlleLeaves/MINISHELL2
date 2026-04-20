@@ -210,7 +210,7 @@ char    *get_key(char *line, int start);
 bool    replace_key_in_line(t_data *d, char *value, int start, int val_len, int key_len);
 
 /* parser-specific */
-char    *get_line(void);
+char    *get_line(t_data *data);
 
 /* tokenization helpers */
 t_token *classify_and_make(t_data *d, char *line);
@@ -225,4 +225,5 @@ int index_to_char(char *str, char c);
 
 /* signals*/
 void	setup_signals(t_sig_status	type);
+
 #endif

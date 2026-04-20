@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 14:41:53 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:54:04 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	get_input(t_data *data)
 	data->head = tokenize_input(data, data->line);
 	
 	data->current = data->head;
-	//print_tokenized_list(&data->;
+	//print_tokenized_list(data);
 	free(data->line);
 	return (0);
 }
@@ -93,6 +93,24 @@ int	execute_input(t_data *data)
 	if (ft_start_exec(data->head, data) < 0)
 		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head), -1);
 	return (0);
+}
+
+//roept getline en checked de return waarde
+char	*get_line(t_data *data)
+{
+	char	*line;
+
+	line = readline("Minishell>");
+	if (line == NULL)
+	{
+		rl_clear_history();
+		//sluit ales wat geinitialiseerd is;
+		ft_free_arr((void **)data->envp);
+		exit(0);
+	}
+	if (line[0] == '\0')
+		return (free(line), NULL);
+	return (line);
 }
 
 //static void	print_tokenized_list(t_data	*data)
