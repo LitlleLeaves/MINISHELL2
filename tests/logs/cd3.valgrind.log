@@ -1,0 +1,26 @@
+==43102== Memcheck, a memory error detector
+==43102== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==43102== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==43102== Command: ./minishell
+==43102== Parent PID: 43068
+==43102== 
+==43102== 
+==43102== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==43102== Open file descriptor 3: /home/jjhurry/Projects/Minishell2/tests/logs/cd3.valgrind.log
+==43102==    <inherited from parent>
+==43102== 
+==43102== 
+==43102== HEAP SUMMARY:
+==43102==     in use at exit: 213,007 bytes in 300 blocks
+==43102==   total heap usage: 539 allocs, 239 frees, 241,277 bytes allocated
+==43102== 
+==43102== LEAK SUMMARY:
+==43102==    definitely lost: 0 bytes in 0 blocks
+==43102==    indirectly lost: 0 bytes in 0 blocks
+==43102==      possibly lost: 0 bytes in 0 blocks
+==43102==    still reachable: 213,007 bytes in 300 blocks
+==43102==         suppressed: 0 bytes in 0 blocks
+==43102== Reachable blocks (those to which a pointer was found) are not shown.
+==43102== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==43102== 
+==43102== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

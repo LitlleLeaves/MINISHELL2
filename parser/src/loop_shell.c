@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 15:54:04 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:57:59 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		main_loop(t_data *data)
 	setup_signals(INTERACTIVE);
 	while (1)
 	{
-		data->line = get_line();
+		data->line = get_line(data);
 		setup_signals(NON_INTERACTIVE);
 		if (data->line && *data->line)
 		{
