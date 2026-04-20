@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/17 17:20:43 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/20 12:00:13 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int ft_wait_all_children(t_data *data, int nmb_of_pipes)
     }
     if (WIFEXITED(last_status))
 		data->exit_code = WEXITSTATUS(last_status);
-	fprintf(stderr, "exitcode is: %i\n", data->exit_code);
+	// fprintf(stderr, "exitcode is: %i\n", data->exit_code);
 	return (data->exit_code);
 }
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^

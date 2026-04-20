@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_funcs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:36:59 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/16 17:06:01 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/20 12:32:58 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char	*get_file_name(char *line, int *index)
 	value = ft_substr(line, start, (*index));
 	if (!value)
 		return (NULL);
-	if (line[(*index + 1)] == '\'' || line[(*index + 1)] == '"')
+	if (line[(*index)] != '\0' && (line[(*index + 1)] == '\'' || line[(*index + 1)] == '"'))
 		(*index) += 2;
 	return (value);
 }

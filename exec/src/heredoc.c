@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/16 15:13:25 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 12:35:51 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ ft_strncmp(line, curr->value, ft_strlen(curr->value)) == 0)
     	write(curr->heredoc_fd, "\n", 1);
     	free(line);
 	}
+	free(line);
 	close(curr->heredoc_fd);
 	return (1);
 }

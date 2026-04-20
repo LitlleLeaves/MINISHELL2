@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   expansion.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: side-lan <side-lan@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/04/04 17:23:46 by side-lan      #+#    #+#                 */
-/*   Updated: 2026/04/17 14:15:14 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
+/*   Updated: 2026/04/20 12:01:55 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*get_key(char *line, int start)
 			line[start +index] != '"' && line[start +index] != '\'')
 		index++;
 	key = ft_substr(line, start, index);
-	fprintf(stderr, "key = %s\n", key);
+	// fprintf(stderr, "key = %s\n", key);
 	if (!key)
 		return (printf("error in getkey\n"), NULL);
 	return (key);
@@ -117,7 +117,7 @@ bool	replace_key_in_line(t_data *d, char *value, int start, int val_len, int key
 		index++;
 	}
 	new[index] = '\0';
-	printf("%s\n", new);
+	// printf("%s\n", new);
 	free(d->line);
 	d->line = new;
 	return (true);
