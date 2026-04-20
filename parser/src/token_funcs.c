@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:36:59 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 12:59:50 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 15:21:37 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,10 @@ t_token *if_redirection(t_data *d, int start, char *line, t_token_type type)
 	{
 		start++;
 		if (line[start] == '\0')
-			return (printf("whopla geen filename"), NULL);
+		{
+			d->index += index + start;
+			return (NULL);
+		}
 	}
 	if ((line[start] == '\'' || line[start] == '"') && type == HEREDOC_EXPANSION)
 	{
