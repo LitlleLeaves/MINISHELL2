@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 12:54:25 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 14:06:42 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_token	*tokenize_input(t_data *d, char *str)
 	d->index = 0;
 	while (str[d->index] != '\0')
 	{
-		fprintf(stderr, "%c\n", str[d->index]);
 		start = d->index;
 		if (current == NULL)
 		{

@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/20 12:00:13 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 14:41:00 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,45 @@ int	ft_fork_process(t_token *head, t_data *data, int nmb_of_pipes)
 	}
 	return (1);
 }
+
+void ft_no_word_redirection(t_token *head,t_data *data)
+{
+	t_token	*curr;
+	int		in;
+	int		out;
+
+	curr = head;
+	in = -2;
+	out = -2;
+	while (curr != NULL)
+	{
+		if (curr->type == REDIR_IN)
+			ft_handle_in(&in, curr);
+		curr = curr->next;
+	}
+	curr = head;
+	while (curr != NULL)
+	{
+		if (curr->type == REDIR_OUT_APP)
+			ft_handle_out_app(&out, curr);
+		if (curr->type == REDIR_OUT_TRUNC)
+			ft_handle_in(&out, curr);
+	}
+}
+
 //parent process sets up pipes and pids,check for single builtin and executes it or then forks the children, and waits for them to finish
 int ft_start_exec(t_token *head, t_data *data)
 {
 	int	nmb_of_pipes;
+	int words;
 
 	nmb_of_pipes = ft_find_pipes(head);
+	if (nmb_of_pipes == 0 && ft_count_single_words(head) == 0);
+	{
+		ft_no_word_redirection(head, data);
+		ft_free_tokens(head);
+		
+	}
 	if (nmb_of_pipes == 0 && ft_check_builtins_before_fork(head, data) > 0)
 	{
 		ft_free_tokens(head);
