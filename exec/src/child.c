@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:53:09 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/08 16:37:28 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 13:21:04 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ void ft_child_execute(t_exec_info *exec_info, t_data *data)
 	ft_check_builtins(exec_info, data, exec_info->arguments);
 	executable = ft_decide_executable(exec_info->arguments[0], data);
 	if (executable == NULL)
+	{
 		exit(127);
+	}
 	else
 		execve(executable, exec_info->arguments, data->envp);
+	write(2, "execution failure\n", 19);
+	exit(128);
 }
 
 int ft_build_arguments_array(t_exec_info *exec_info)
@@ -60,7 +64,9 @@ int ft_build_arguments_array(t_exec_info *exec_info)
 		{
 			exec_info->arguments[i] = ft_strdup(curr->value);
 			if (exec_info->arguments[i] == NULL)
+			{
 				return (ft_free_r((void **)exec_info->arguments, i), -1);
+			}
 			i++;
 		}
 		curr = curr->next;

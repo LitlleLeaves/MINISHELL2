@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:36:59 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 12:32:58 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 12:59:50 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_token	*if_quotes(t_data *d, char *line, int start)
 	if (index == 0)
 	{
 		value = ft_strdup("");
-		d->index += start + 2;
+		d->index += start + 1;
 		return (make_new_token(value, WORD));
 	}
 	value = ft_substr(line, start, index);

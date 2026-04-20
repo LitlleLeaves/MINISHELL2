@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_garbage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/17 13:56:15 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/20 12:54:25 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	*tokenize_input(t_data *d, char *str)
 	d->index = 0;
 	while (str[d->index] != '\0')
 	{
+		fprintf(stderr, "%c\n", str[d->index]);
 		start = d->index;
 		if (current == NULL)
 		{

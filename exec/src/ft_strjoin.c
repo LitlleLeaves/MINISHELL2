@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:04:46 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/03/31 13:30:01 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 12:49:15 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		len;
 	char	*str;
+	
 
 	len = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(sizeof(char) * (len + 1));
