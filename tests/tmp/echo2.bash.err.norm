@@ -1,3 +1,0 @@
-bash: line 1: warning: here-document at line 1 delimited by end-of-file (wanted `eof')
-cat: 1cat: : No such file or directory2
-: No such file or directory
