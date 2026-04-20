@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:56:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/20 13:05:20 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/20 14:04:46 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char *ft_make_executable(char *executable, t_data *data)
 	char	*path;
 
 	if (executable[0] == '\0')
-		return (executable);
+		return ("");
 	paths = ft_split(ft_getenv(data, "PATH"), ':');
 	if (paths == NULL)
 		return (NULL);
@@ -82,7 +82,6 @@ char *ft_make_executable(char *executable, t_data *data)
 		path = ft_strjoin(paths[i], "/");
 		if (path == NULL)
 			return (ft_free_arr((void **)paths), NULL);
-		fprintf(stderr, "executable = %s\n", executable);
 		exec = ft_strjoin(path, executable);
 		if (exec == NULL)
 			return (ft_free_arr((void **)paths), free(path), NULL);
