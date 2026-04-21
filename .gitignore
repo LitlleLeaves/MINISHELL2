@@ -1,5 +1,2 @@
-*.o
-*.d
-*.txt
-minishell
-valgrind*
+parser.c
+[?2004hMinishell>^C[?2004l
