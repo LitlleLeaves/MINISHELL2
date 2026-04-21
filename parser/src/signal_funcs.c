@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:06:58 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 13:56:25 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/21 14:10:36 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ void	heredoc_handler(int signum)
     rl_on_new_line();
     rl_replace_line("", 0);
     rl_redisplay();
-	exit_status = 130;
+	signal_received = 1;
 }
 
 //handle signal during the interactive state
 void interactive_handler(int signum)
 {
     (void)signum;
-    
+
     write(STDOUT_FILENO, "\n", 1);
     rl_on_new_line();
     rl_replace_line("", 0);
     rl_redisplay();
-	exit_status = 130;
+	signal_received = 1;
 }
 
 //func to call whenever we transition between different states ie; child, interactive heredoc and ignore

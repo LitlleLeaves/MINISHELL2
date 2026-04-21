@@ -19,8 +19,7 @@
 #include <limits.h>
 #include <stdbool.h>
 
-
-extern volatile sig_atomic_t exit_status;
+extern volatile sig_atomic_t signal_received;
 
 typedef enum e_sig_status
 {

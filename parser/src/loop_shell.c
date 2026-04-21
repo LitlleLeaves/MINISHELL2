@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 14:05:48 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 14:22:11 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void	ft_init_data(t_data *data);
 
 //global exit status is nodig voor signals
-volatile sig_atomic_t exit_status = 0;
+volatile sig_atomic_t signal_received = 0;
 
 static void	ft_init_data(t_data *data)
 {
@@ -99,9 +99,9 @@ char	*get_line(t_data *data)
 	char	*line;
 
 	line = readline("Minishell>");
-	if (exit_status == 130)
+	if (signal_received == 1)
     {
-	    exit_status = 0;
+	    data->exit_code = 130;
         if (line)
             free(line);
         return (NULL);
@@ -113,7 +113,7 @@ char	*get_line(t_data *data)
 		ft_free_arr((void **)data->envp);
 		exit(0);
 	}
-	if (line[0] == '\0' && exit_status != 130)
+	if (line[0] == '\0' && signal_received == 0)
 		return (free(line), NULL);
 	return (line);
 }
