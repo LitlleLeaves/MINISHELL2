@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 12:01:55 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 11:27:50 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ bool	convert_expansions(t_data *d, int start)
 	{
 		if (replace_key_in_line(d, " ", start - 1, 1, key_length) == false)
 			d->line = NULL;
-		return (printf("invalid key\n"), false);
+		return (false);
 	}
 	length = ft_strlen(value);
 	if (replace_key_in_line(d, value, start - 1, length, key_length) == false)

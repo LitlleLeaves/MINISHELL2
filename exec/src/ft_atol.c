@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:33 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/07 15:18:58 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 11:57:29 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static long	ft_atol_help(const char *ptr, int sign)
 }
 
 //converts a string with possible char to integer
-int	ft_atol(const char *ptr)
+int	ft_exit_code_atol(const char *ptr)
 {
 	int		sign;
 	long	res;

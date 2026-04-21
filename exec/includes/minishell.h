@@ -66,6 +66,14 @@ typedef struct s_exec_info
     char    **arguments;
 }               t_exec_info;
 
+typedef struct s_single_fds
+{
+    int fd_in;
+	int fd_out;
+	int	std_out;
+	int std_in;
+}  				t_single_fds;
+
 typedef struct s_data
 {
 	    /* exec-related */
@@ -196,7 +204,7 @@ int ft_echo_no_newline(char **arguments, int i);
 int ft_check_echo_option(char **arguments);
 
 /* ft_atol / ft_itoa */
-int ft_atol(const char *ptr);
+int	ft_exit_code_atol(const char *ptr);
 char *ft_itoa(int n);
 
 /* heredoc */

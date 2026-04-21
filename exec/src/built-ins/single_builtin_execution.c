@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:07:12 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/16 11:51:35 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 12:28:10 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int ft_single_argument_list(t_token *curr, int words, char **arguments)
 	int	counter;
 
 	counter = 0;
-	while (counter < words || curr != NULL)
+	while (counter < words && curr != NULL)
 	{
 		if (curr->type == WORD)
 		{
@@ -91,40 +91,44 @@ int ft_single_argument_list(t_token *curr, int words, char **arguments)
 }
 
 //apply redirection if applicable
-void ft_single_redirection(t_token *curr, int *fd_in, int *fd_out)
+int ft_single_redirection(t_token *curr, int *fd_in, int *fd_out, t_data *data)
 {
 	while (curr != NULL)
 	{
-		ft_apply_redirection(fd_in, fd_out, curr);
 		if (ft_apply_redirection(fd_in, fd_out, curr) < 0)
-            return ;
+		{
+			data->exit_code = 1;
+			return (-1);
+		}
 		curr = curr->next;	
 	}
-	if (*fd_in >= 0)
-    {
-        dup2(*fd_in, STDIN_FILENO);
-        close(*fd_in);
-    }
-	if (*fd_out >= 0)
-    {
-        dup2(*fd_out, STDOUT_FILENO);
-        close(*fd_out);
-    }
+	// if (*fd_in >= 0)
+    // {
+    //     dup2(*fd_in, STDIN_FILENO);
+    //     close(*fd_in);
+    // }
+	// if (*fd_out >= 0)
+    // {
+    //     dup2(*fd_out, STDOUT_FILENO);
+    //     close(*fd_out);
+    // }
+	return (1);
 }
 
 //main single builtin chekc, first checks if its a builtin command, then applies redirecion and executes the code
 int ft_check_builtins_before_fork(t_token *head, t_data *data)
 {
-	t_token	*curr;
-	int		fd_in;
-	int		fd_out;
-	int		words;
-	char	**arguments;
+	t_token			*curr;
+	int				words;
+	char			**arguments;
+	t_single_fds	fds;
 
 	curr = head;
 	words = ft_count_single_words(curr);
-	fd_in = -2;
-	fd_out = -2;
+	fds.fd_in = -2;
+	fds.fd_out = -2;
+	fds.std_in = -1;
+	fds.std_out = -1;
 
 	arguments = ft_calloc(words + 1, sizeof(char *));
 	if (arguments == NULL)
@@ -132,6 +136,31 @@ int ft_check_builtins_before_fork(t_token *head, t_data *data)
 	ft_single_argument_list(curr , words, arguments);
 	if (ft_check_single_builtin(arguments) == 0)
 		return (ft_free_arr((void **)arguments),-1);
-	ft_single_redirection(curr, &fd_in, &fd_out);
-	return (ft_execute_single_builtin(words, arguments, data),ft_free_arr((void **)arguments), 1);
+	if (ft_single_redirection(curr, &fds.fd_in, &fds.fd_out, data) < 0)
+		return(ft_free_arr((void **)arguments), 2);
+	if (fds.fd_in >= 0)
+    {
+		fds.std_in = dup(STDIN_FILENO);
+        dup2(fds.fd_in, STDIN_FILENO);
+        close(fds.fd_in);
+    }
+    if (fds.fd_out >= 0)
+    {
+        fds.std_out = dup(STDOUT_FILENO);
+        dup2(fds.fd_out, STDOUT_FILENO);
+        close(fds.fd_out);
+    }
+    ft_execute_single_builtin(words, arguments, data);
+    if (fds.std_in >= 0)
+    {
+        dup2(fds.std_in, STDIN_FILENO);
+        close(fds.std_in);
+    }
+    if (fds.std_out >= 0)
+    {
+        dup2(fds.std_out, STDOUT_FILENO);
+        close(fds.std_out);
+    }
+    ft_free_arr((void **)arguments);
+    return (1);
 }

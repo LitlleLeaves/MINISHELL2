@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   built_in.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/17 15:29:13 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/14 14:33:25 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   built_in.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/17 15:29:13 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/21 11:57:54 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void ft_builtin_exit(t_exec_info *exec_info, t_data *data, char **arguments)
 	}
 	else
 	{
-		data->exit_code = ft_atol(arguments[1]);
+		data->exit_code = ft_exit_code_atol(arguments[1]);
 		if (data->exit_code == -1)
 		{
 			data->exit_code = 2;
