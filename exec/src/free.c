@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:52:21 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/13 15:33:01 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 17:43:32 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void ft_free_tokens(t_token *head)
 		free(temp->filename);
 		free(temp);
 	}
+	head = NULL;
 }
 
 //cleanup function to free all allocated memory at the end of execution, including the linked list of tokens, the array of pids and the array of pipes

@@ -6,9 +6,10 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 17:53:50 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:57:12 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -47,8 +48,13 @@ int	main(int argc, char *argv[], char *envp[])
 //main loop of te shell
 int		main_loop(t_data *data)
 {
+	data->line = NULL;
+	data->head = NULL;
 	while (1)
 	{
+		free(data->line);
+		free(data->head);
+		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
 		if (data->line && *data->line)
@@ -85,6 +91,8 @@ int	get_input(t_data *data)
 
 int	execute_input(t_data *data)
 {
+	if (data->head == NULL)
+		return (0);
 	if (handle_heredoc(data->head, data) < 0)
 		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head), -1);
 	if (ft_start_exec(data->head, data) < 0)
