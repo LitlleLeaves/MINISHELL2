@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/20 12:35:51 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 14:16:36 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,12 @@ int handle_heredoc(t_token *head, t_data *data)
 	while (curr != NULL)
 	{
 		if (curr->type == HEREDOC_EXPANSION || curr->type == HEREDOC_NO_EXPANSION)
+		{
+			setup_signals(HEREDOC);
 			if (ft_heredoc_parsing(curr, data) < 0)
 				return (-1);
+			setup_signals(NON_INTERACTIVE);
+		}
 		curr = curr->next;
 	}
 	return (1);
