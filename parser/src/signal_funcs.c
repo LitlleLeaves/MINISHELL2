@@ -6,32 +6,33 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:06:58 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 15:53:39 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/20 17:50:57 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//handle the signal while a heredoc is open
 void	heredoc_handler(int signum)
 {
 	signum = 0;
-	//print spc dingetjes goed;'
-	//vgm precies hetzelfde als 
-	printf("huheredoc?\n");
+    write(STDOUT_FILENO, "\n", 1);
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
 	exit(130);
 }
 
-void	interactive_handler(int signum)
+//handle signal during the interactive state
+void interactive_handler(int signum)
 {
-	signum = 0;
-	rl_on_new_line();
-	write(1, "^c\n", 4);
-	rl_replace_line("", 0);
-	rl_redisplay();
-
-	//opruimfunctie oproepe die 130 terug geeft
-	printf("ja heel interactive dit\n");
-	exit(130);
+    (void)signum;
+    
+    write(STDOUT_FILENO, "\n", 1);
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
+	exit_status = 130;
 }
 
 //func to call whenever we transition between different states ie; child, interactive heredoc and ignore

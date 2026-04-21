@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 15:57:59 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/20 17:55:27 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 //static void	print_tokenized_list(t_data	*data);
 static void	ft_init_data(t_data *data);
 
-//global voor de signals
-volatile sig_atomic_t signum = 0;
+//global exit status is nodig voor signals
+volatile sig_atomic_t exit_status = 0;
 
 static void	ft_init_data(t_data *data)
 {
@@ -47,10 +47,9 @@ int	main(int argc, char *argv[], char *envp[])
 //main loop of te shell
 int		main_loop(t_data *data)
 {
-
-	setup_signals(INTERACTIVE);
 	while (1)
 	{
+		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
 		setup_signals(NON_INTERACTIVE);
 		if (data->line && *data->line)
@@ -79,7 +78,6 @@ int	get_input(t_data *data)
 	if (data->line == NULL)
 		return (-1);
 	data->head = tokenize_input(data, data->line);
-	
 	data->current = data->head;
 	//print_tokenized_list(data);
 	free(data->line);
@@ -101,6 +99,13 @@ char	*get_line(t_data *data)
 	char	*line;
 
 	line = readline("Minishell>");
+	if (exit_status == 130)
+    {
+	    exit_status = 0;
+        if (line)
+            free(line);
+        return (NULL);
+    }
 	if (line == NULL)
 	{
 		rl_clear_history();
@@ -108,7 +113,7 @@ char	*get_line(t_data *data)
 		ft_free_arr((void **)data->envp);
 		exit(0);
 	}
-	if (line[0] == '\0')
+	if (line[0] == '\0' && exit_status != 130)
 		return (free(line), NULL);
 	return (line);
 }

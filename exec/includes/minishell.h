@@ -19,6 +19,9 @@
 #include <limits.h>
 #include <stdbool.h>
 
+
+extern volatile sig_atomic_t exit_status;
+
 typedef enum e_sig_status
 {
 	INTERACTIVE,  // terwijl je kan type
