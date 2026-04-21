@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 14:12:04 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:21:45 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		main_loop(t_data *data)
 		if (data->head == NULL)
 			continue ;
 		if (execute_input(data) == -1)
-			return (-1);
+			continue ;
 		if (data->shutdown != -1)
 		{
 			ft_free_arr((void **)data->envp);

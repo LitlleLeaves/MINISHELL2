@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 14:21:10 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:47:45 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,35 +107,46 @@ char *ft_heredoc_expansion(char *line, t_data *data)
 	return (line);
 }
 
-
 int ft_heredoc_parsing(t_token *curr, t_data *data)
 {
-	char		*line;
+    char *line;
 
-	if (ft_heredoc_create_file(curr, data) < 0)
-		return (-1);
-	while(1)
-	{
-		line = readline("> ");
-		if (line == NULL || \
-ft_strncmp(line, curr->value, ft_strlen(curr->value)) == 0)
-			break;
-		if (curr->type == HEREDOC_EXPANSION)
-		{
-			data->line = line;
-			if (ft_strchr(line, '$') != NULL)
-				check_expansions(data);
-			line = data->line;
-			if (line == NULL)
-				return (-1);
-		}
-		write(curr->heredoc_fd, line, ft_strlen(line));
-    	write(curr->heredoc_fd, "\n", 1);
-    	free(line);
-	}
-	free(line);
-	close(curr->heredoc_fd);
-	return (1);
+    if (ft_heredoc_create_file(curr, data) < 0)
+        return (-1);
+    signal_received = 0;
+    setup_signals(HEREDOC);
+	rl_event_hook = heredoc_signal_hook;
+	while (1)
+    {
+        line = readline("> ");
+        if (signal_received)
+        {
+			signal_received = 0;
+			return (-2);
+        }
+        if (!line)
+            break;
+        if (ft_strncmp(line, curr->value, ft_strlen(curr->value)) == 0)
+        {
+            free(line);
+            break;
+        }
+        if (curr->type == HEREDOC_EXPANSION && ft_strchr(line, '$'))
+        {
+            data->line = line;
+            check_expansions(data);
+            line = data->line;
+            if (!line)
+                return (-1);
+        }
+        write(curr->heredoc_fd, line, ft_strlen(line));
+        write(curr->heredoc_fd, "\n", 1);
+        free(line);
+    }
+    setup_signals(NON_INTERACTIVE);
+	rl_event_hook = NULL;
+    close(curr->heredoc_fd);
+    return (1);
 }
 
 int handle_heredoc(t_token *head, t_data *data)
@@ -146,8 +157,10 @@ int handle_heredoc(t_token *head, t_data *data)
 	while (curr != NULL)
 	{
 		if (curr->type == HEREDOC_EXPANSION || curr->type == HEREDOC_NO_EXPANSION)
+		{
 			if (ft_heredoc_parsing(curr, data) < 0)
 				return (-1);
+		}
 		curr = curr->next;
 	}
 	return (1);

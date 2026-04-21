@@ -235,5 +235,6 @@ int index_to_char(char *str, char c);
 
 /* signals*/
 void	setup_signals(t_sig_status	type);
+int		heredoc_signal_hook(void);
 
 #endif

@@ -1,2 +1,6 @@
-parser.c
-[?2004hMinishell>^C[?2004l
+*.o
+*.d
+parser/obj/*.o
+parser/dep/*.d
+exec/obj/*.o
+exec/dep/*.d
