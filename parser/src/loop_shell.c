@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 15:21:45 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 16:29:32 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		main_loop(t_data *data)
 {
 	while (1)
 	{
+		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
 		setup_signals(NON_INTERACTIVE);
@@ -104,6 +105,7 @@ char	*get_line(t_data *data)
 	    data->exit_code = 130;
         if (line)
             free(line);
+		signal_received = 0;
         return (NULL);
     }
 	if (line == NULL)

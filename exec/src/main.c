@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 14:22:00 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 16:23:21 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ static int ft_wait_all_children(t_data *data, int nmb_of_pipes)
     }
     if (WIFEXITED(last_status))
 		data->exit_code = WEXITSTATUS(last_status);
-	// fprintf(stderr, "exitcode is: %i\n", data->exit_code);
+	else if (WIFSIGNALED(last_status))
+    	data->exit_code = 128 + WTERMSIG(last_status);
+		// fprintf(stderr, "exitcode is: %i\n", data->exit_code);
 	return (data->exit_code);
 }
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -57,6 +59,7 @@ int	ft_fork_process(t_token *head, t_data *data, int nmb_of_pipes)
 			return (-1);
 		else if (data->pids[i] == 0)
 		{
+			setup_signals(CHILD);
 			ft_setup_pipes(data, nmb_of_pipes, i);
 			if (ft_child_process(head, data, i) < 0)
 				exit(EXIT_FAILURE);
@@ -64,6 +67,7 @@ int	ft_fork_process(t_token *head, t_data *data, int nmb_of_pipes)
 		}
 		else
 			i++;
+		setup_signals(IGNORE);
 	}
 	return (1);
 }
