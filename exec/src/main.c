@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 13:55:04 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 14:00:01 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int ft_start_exec(t_token *head, t_data *data)
 	nmb_of_pipes = ft_find_pipes(head);
 	if (nmb_of_pipes == 0 && ft_count_single_words(head) == 0)
 	{
-		ft_no_word_redirection(head, data);
+		ft_no_word_redirection(head);
 		ft_free_tokens(head);
 		return (1);
 	}
