@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 15:47:45 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:33:15 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int ft_heredoc_parsing(t_token *curr, t_data *data)
 
     if (ft_heredoc_create_file(curr, data) < 0)
         return (-1);
-    signal_received = 0;
     setup_signals(HEREDOC);
 	rl_event_hook = heredoc_signal_hook;
 	while (1)
@@ -143,7 +142,7 @@ int ft_heredoc_parsing(t_token *curr, t_data *data)
         write(curr->heredoc_fd, "\n", 1);
         free(line);
     }
-    setup_signals(NON_INTERACTIVE);
+    setup_signals(INTERACTIVE);
 	rl_event_hook = NULL;
     close(curr->heredoc_fd);
     return (1);

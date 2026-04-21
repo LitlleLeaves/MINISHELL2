@@ -219,8 +219,9 @@ bool    convert_expansions(t_data *d, int start);
 char    *get_key(char *line, int start);
 bool    replace_key_in_line(t_data *d, char *value, int start, int val_len, int key_len);
 
-/* parser-specific */
+/* readline tering zooi wat enn kk functie*/
 char    *get_line(t_data *data);
+char	*safe_readline(void);
 
 /* tokenization helpers */
 t_token *classify_and_make(t_data *d, char *line);
@@ -236,5 +237,6 @@ int index_to_char(char *str, char c);
 /* signals*/
 void	setup_signals(t_sig_status	type);
 int		heredoc_signal_hook(void);
+int		interactive_signal_hook(void);
 
 #endif

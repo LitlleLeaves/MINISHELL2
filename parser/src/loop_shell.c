@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 16:46:05 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 17:53:50 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		main_loop(t_data *data)
 {
 	while (1)
 	{
-		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
 		if (data->line && *data->line)
@@ -92,59 +91,3 @@ int	execute_input(t_data *data)
 		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head), -1);
 	return (0);
 }
-
-//roept getline en checked de return waarde
-char	*get_line(t_data *data)
-{
-	char	*line;
-
-	line = readline("Minishell>");
-	if (signal_received == 1)
-    {
-	    data->exit_code = 130;
-        if (line)
-            free(line);
-		signal_received = 0;
-        return (NULL);
-    }
-	if (line == NULL)
-	{
-		rl_clear_history();
-		//sluit ales wat geinitialiseerd is;
-		ft_free_arr((void **)data->envp);
-		exit(0);
-	}
-	if (line[0] == '\0' && signal_received == 0)
-		return (free(line), NULL);
-	return (line);
-}
-
-//static void	print_tokenized_list(t_data	*data)
-//{
-//	while (data->current != NULL)
-//	{
-//		if (data->current->value == NULL)
-//			data->current = data->current->next;
-//		// printf("%s %s\n", data->current->value, stringify_enum(data->current->type));
-//		data->current = data->current->next;
-//	}
-//}
-
-// static char	*stringify_enum(t_token_type token)
-// {
-// 	if (token == WORD)
-// 		return ("WORD");
-// 	if (token == PIPE)
-// 		return ("PIPE");
-// 	if (token == REDIR_OUT_APP)
-// 		return ("REDIR_OUT_APP");
-// 	if (token == REDIR_OUT_TRUNC)
-// 		return ("REDIR_OUT_TRUNC");
-// 	if (token == REDIR_IN)
-// 		return ("REDIR_IN");
-// 	if (token == HEREDOC_EXPANSION)
-// 		return ("HEREDOC_EXPANSION");
-// 	if (token == HEREDOC_NO_EXPANSION)
-// 		return ("HEREDOC_NO_EXPANSION");
-// 	return (NULL);
-// }

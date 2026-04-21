@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_funcs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:06:58 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 16:38:57 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 17:52:21 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ void	heredoc_handler(int signum)
 	signal_received = 1;
 }
 
+void	interactive_handler(int signum)
+{
+	(void)signum;
+
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	signal_received = 1;
+}
+
 int	heredoc_signal_hook(void)
 {
 	if (signal_received == 1)
@@ -44,15 +54,13 @@ int	heredoc_signal_hook(void)
 	return (0);
 }
 //handle signal during the interactive state
-void interactive_handler(int signum)
+int interactive_signal_hook(void)
 {
-    (void)signum;
-
-    write(STDOUT_FILENO, "\n", 1);
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
-	signal_received = 1;
+	if (signal_received == 1)
+	{
+		rl_done = 1;
+	}
+	return (0);
 }
 
 //func to call whenever we transition between different states ie; child, interactive heredoc and ignore
@@ -60,11 +68,6 @@ void	setup_signals(t_sig_status	type)
 {
 	struct sigaction sa;
 
-	if (type == NON_INTERACTIVE)//na t leze van de eerte lijn maar wet nog niet wat anders is dan n kind
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-	}
 	if (type == CHILD) // roep aan in het begin van de kind process
 	{
 		signal(SIGINT, SIG_DFL);
