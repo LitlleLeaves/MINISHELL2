@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:31:15 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 11:46:29 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 17:30:52 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int ft_export_validity_checker(char *str)
 	int	i;
 
 	i = 0;
-	if (str == NULL)
+	if (str == NULL || str[0] == '=')
 		return (0);
 	if (ft_isdigit(str[0]) == 1 || str[0] == '\0')
 		return (0);
@@ -83,12 +83,12 @@ int ft_add_to_export_list(char **arguments, t_data *data)
 	i = 1;
 	while (arguments[i] != NULL)
 	{
-		printf("%s\n", arguments[i]); // debug
+		// printf("%s\n", arguments[i]); // debug
 		if (ft_export_validity_checker(arguments[i]) == 0)
 		{
-			write(2, "Minishell: export: ", 20);
+			write(2, "Minishell: export: `", 20);
 			write(2, arguments[i], strlen(arguments[i]));
-			write(2, ": not a valid identifier\n", 26);
+			write(2, "': not a valid identifier\n", 26);
 			data->exit_code = 1;
 			i++;	
 			continue ;
