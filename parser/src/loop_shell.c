@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 16:29:32 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 16:46:05 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int		main_loop(t_data *data)
 		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
-		setup_signals(NON_INTERACTIVE);
 		if (data->line && *data->line)
 		{
 			if (get_input(data) == -1)

@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 16:23:21 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 16:47:05 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ static int ft_wait_all_children(t_data *data, int nmb_of_pipes)
     if (WIFEXITED(last_status))
 		data->exit_code = WEXITSTATUS(last_status);
 	else if (WIFSIGNALED(last_status))
+	{
     	data->exit_code = 128 + WTERMSIG(last_status);
-		// fprintf(stderr, "exitcode is: %i\n", data->exit_code);
+    	if (WTERMSIG(last_status) == SIGINT)
+        	write(1, "\n", 1);
+    	if (WTERMSIG(last_status) == SIGQUIT)
+        	write(1, "Quit (core dumped)\n", 19);
+	}
 	return (data->exit_code);
 }
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^
