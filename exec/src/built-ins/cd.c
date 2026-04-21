@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:27:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/20 12:21:51 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/21 11:51:49 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ int ft_cd_no_arguments(t_data *data)
 		return (1);
 	}
 	if (chdir(home) == -1)
-		return (printf("minishell: %s\n", strerror(errno)), 1);
+	{
+		write(2, "Minishell: ", 12);
+		write(2, strerror(errno), ft_strlen(strerror(errno)));
+		return (1);
+	}
 	else	
 		ft_set_pwd_oldpwd(data);
 	return (0);
@@ -78,10 +82,10 @@ void ft_cd_helper(t_token **curr)
 
 void ft_print_cd_error(char *path)
 {
-	write(2, "Minishell: ", 12);
-	write(2, strerror(errno),ft_strlen(strerror(errno)));
-	write(2, ": ", 3);
+	write(2, "Minishell: cd: ", 16);
 	write(2, path, ft_strlen(path));
+	write(2, ": ", 3);
+	write(2, strerror(errno),ft_strlen(strerror(errno)));
 	write(2, "\n", 2);
 }
 

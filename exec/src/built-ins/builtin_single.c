@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   builtin_single.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/19 14:28:04 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/14 14:33:38 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   builtin_single.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/19 14:28:04 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/21 11:58:02 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void ft_builtin_single_exit(int words, char **arguments, t_data *data)
 	}
 	else
 	{
-		data->exit_code = ft_atol(arguments[1]);
+		data->exit_code = ft_exit_code_atol(arguments[1]);
 		if (data->exit_code == -1)
 		{
 			data->exit_code = 2;
