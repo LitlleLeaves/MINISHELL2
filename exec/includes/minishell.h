@@ -43,6 +43,13 @@ typedef enum	e_token_type
     ENVIRONMENT,
 }               t_token_type;
 
+typedef enum	e_sig_kind
+{
+    HEREDOC_INT,
+	INTERACTIVE_INT,
+	INTERACTIVE_KILL,
+}               t_sig_kind;
+
 /* Backwards-compat aliases used across the codebase */
 #define REDIR_OUT_TRUNCT REDIR_OUT_TRUNC
 #define REDIR_OUT_APPEND REDIR_OUT_APP
@@ -89,6 +96,7 @@ typedef struct s_data
     char   			 *line;
     int    			 index;
 	int				level;
+	t_sig_kind		sig;
 	    /* parser-related */
     int     		shell_level;
     t_token 		*current;

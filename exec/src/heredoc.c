@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 17:33:15 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/22 12:35:21 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int ft_heredoc_parsing(t_token *curr, t_data *data)
 {
     char *line;
 
+	line = NULL;
     if (ft_heredoc_create_file(curr, data) < 0)
         return (-1);
     setup_signals(HEREDOC);
@@ -121,6 +122,10 @@ int ft_heredoc_parsing(t_token *curr, t_data *data)
         if (signal_received)
         {
 			signal_received = 0;
+			setup_signals(INTERACTIVE);
+			close(curr->heredoc_fd);
+			rl_event_hook = NULL;
+			free(line);
 			return (-2);
         }
         if (!line)
@@ -151,6 +156,7 @@ int ft_heredoc_parsing(t_token *curr, t_data *data)
 int handle_heredoc(t_token *head, t_data *data)
 {
 	t_token	*curr;
+	int		ret;
 
 	curr = head;
 	while (curr != NULL)
@@ -158,7 +164,10 @@ int handle_heredoc(t_token *head, t_data *data)
 		if (curr->type == HEREDOC_EXPANSION || curr->type == HEREDOC_NO_EXPANSION)
 		{
 			if (ft_heredoc_parsing(curr, data) < 0)
+			{
+				setup_signals(INTERACTIVE);	
 				return (-1);
+			}
 		}
 		curr = curr->next;
 	}

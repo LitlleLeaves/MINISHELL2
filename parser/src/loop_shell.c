@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/22 12:14:29 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 12:50:00 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ int		main_loop(t_data *data)
 		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
+		if (data->sig == INTERACTIVE_INT)
+			continue;
+		if (data->sig == INTERACTIVE_KILL)
+			exit(0);
 		if (data->line && *data->line)
 		{
 			if (get_input(data) == -1)
@@ -81,6 +85,7 @@ int		main_loop(t_data *data)
 			continue ;
 		if (data->shutdown != -1)
 		{
+			ft_free_tokens(data->head);
 			ft_free_arr((void **)data->envp);
 			rl_clear_history();
 			exit(data->exit_code);
