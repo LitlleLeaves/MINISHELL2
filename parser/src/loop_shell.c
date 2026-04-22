@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/22 12:10:23 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 12:14:29 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,19 @@ int	main(int argc, char *argv[], char *envp[])
 	return (0);
 }
 
+int	get_input(t_data *data)
+{
+	add_history(data->line);
+	check_expansions(data);
+	if (data->line == NULL)
+		return (-1);
+	data->head = tokenize_input(data, data->line);
+	data->current = data->head;
+	//print_tokenized_list(data);
+	free(data->line);
+	return (0);
+}
+
 //main loop of te shell
 int		main_loop(t_data *data)
 {
@@ -73,19 +86,6 @@ int		main_loop(t_data *data)
 			exit(data->exit_code);
 		}
 	}
-	return (0);
-}
-
-int	get_input(t_data *data)
-{
-	add_history(data->line);
-	check_expansions(data);
-	if (data->line == NULL)
-		return (-1);
-	data->head = tokenize_input(data, data->line);
-	data->current = data->head;
-	//print_tokenized_list(data);
-	free(data->line);
 	return (0);
 }
 
