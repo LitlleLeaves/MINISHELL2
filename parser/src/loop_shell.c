@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 17:57:12 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/22 12:10:23 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		main_loop(t_data *data)
 	while (1)
 	{
 		free(data->line);
-		free(data->head);
+		ft_free_tokens(data->head);
 		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
