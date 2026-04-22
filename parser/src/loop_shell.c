@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 17:57:12 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/21 19:33:33 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_init_data(t_data *data)
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	data;
-	
+
 	if (argc != 1)
 		return (10);
 	argv[0] = 0;

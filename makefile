@@ -60,7 +60,8 @@ SRC_FILES_P := \
 	token_funcs.c \
 	token_garbage.c \
 	expansion.c \
-	signal_funcs.c
+	signal_funcs.c \
+	read_line.c
 
 # object files
 OBJS_E := $(addprefix $(OBJ_DIR_E)/, $(SRC_FILES_E:.c=.o) $(BUILTINS_SRC_FILES_E:.c=.o))
