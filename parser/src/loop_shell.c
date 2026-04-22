@@ -6,9 +6,10 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 19:33:33 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/22 13:59:44 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include "minishell.h"
@@ -45,6 +46,19 @@ int	main(int argc, char *argv[], char *envp[])
 	return (0);
 }
 
+int	get_input(t_data *data)
+{
+	add_history(data->line);
+	check_expansions(data);
+	if (data->line == NULL)
+		return (-1);
+	data->head = tokenize_input(data, data->line);
+	data->current = data->head;
+	//print_tokenized_list(data);
+	free(data->line);
+	return (0);
+}
+
 //main loop of te shell
 int		main_loop(t_data *data)
 {
@@ -53,10 +67,14 @@ int		main_loop(t_data *data)
 	while (1)
 	{
 		free(data->line);
-		free(data->head);
+		ft_free_tokens(data->head);
 		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
+		if (data->sig == INTERACTIVE_INT)
+			continue;
+		if (data->sig == INTERACTIVE_KILL)
+			exit(0);
 		if (data->line && *data->line)
 		{
 			if (get_input(data) == -1)
@@ -68,24 +86,12 @@ int		main_loop(t_data *data)
 			continue ;
 		if (data->shutdown != -1)
 		{
+			ft_free_tokens(data->head);
 			ft_free_arr((void **)data->envp);
 			rl_clear_history();
 			exit(data->exit_code);
 		}
 	}
-	return (0);
-}
-
-int	get_input(t_data *data)
-{
-	add_history(data->line);
-	check_expansions(data);
-	if (data->line == NULL)
-		return (-1);
-	data->head = tokenize_input(data, data->line);
-	data->current = data->head;
-	//print_tokenized_list(data);
-	free(data->line);
 	return (0);
 }
 
