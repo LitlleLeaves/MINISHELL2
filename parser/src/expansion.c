@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 11:27:50 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 15:50:23 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	check_expansions(t_data *d)
 			while (d->line[index] != '\'' && d->line[index] != '\0')
 				index++;
 		}
-		while (d->line[index] == '$')
+		while (d->line[index] == '$' && d->line[index + 1] != ' ' && d->line[index + 1] != '"')
 		{
 			convert_expansions(d, index);
 		}
