@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:56:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 12:29:28 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 13:46:59 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char *ft_make_executable(char *executable, t_data *data)
 		free(path);
 		free(exec);
 	}
-	ft_free_tokens(data->head);
+	ft_free_tokens(data->head, data);
 	// write(2, "Minishell: ", 12);
 	write(2, executable, ft_strlen(executable));
 	write(2,": command not found\n", 21);

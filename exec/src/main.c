@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 16:47:05 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 13:50:02 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,18 @@ int ft_start_exec(t_token *head, t_data *data)
 	if (nmb_of_pipes == 0 && ft_count_single_words(head) == 0)
 	{
 		ft_no_word_redirection(head);
-		ft_free_tokens(head);
+		ft_free_tokens(head, data);
 		return (1);
 	}
 	if (nmb_of_pipes == 0 && ft_check_builtins_before_fork(head, data) > 0)
 	{
-		ft_free_tokens(head);
+		ft_free_tokens(head, data);
 		return (1);
 	}
 	if (ft_create_pipes_and_pids(nmb_of_pipes,data) < 0)
-		return (ft_free_tokens(head),-2);
+		return (ft_free_tokens(head, data),-2);
 	if (ft_fork_process(head, data, nmb_of_pipes) < 0)
-		return (ft_free_tokens(head), ft_close_all_pipes(data, nmb_of_pipes),- 3);
+		return (ft_free_tokens(head, data), ft_close_all_pipes(data, nmb_of_pipes),- 3);
 	ft_close_all_pipes(data, nmb_of_pipes);
 	// ft_close_heredoc_fds(head);
 	ft_wait_all_children(data, nmb_of_pipes);

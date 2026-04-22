@@ -48,6 +48,7 @@ typedef enum	e_sig_kind
     HEREDOC_INT,
 	INTERACTIVE_INT,
 	INTERACTIVE_KILL,
+	NOTHING,
 }               t_sig_kind;
 
 /* Backwards-compat aliases used across the codebase */
@@ -113,7 +114,7 @@ int ft_start_exec(t_token *head, t_data *data);
 /* free.c */
 void    ft_free_arr(void **array);
 void    ft_free_r(void **array, int i);
-void    ft_free_tokens(t_token *head);
+void    ft_free_tokens(t_token *head, t_data *data);
 void    ft_cleanup(t_token *head, t_data *data, int nmb_of_pipes);
 void    ft_child_builtin_cleanup(t_data *data, char **arguments);
 

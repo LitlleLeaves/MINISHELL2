@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/22 12:35:21 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 13:39:44 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int ft_heredoc_parsing(t_token *curr, t_data *data)
 			signal_received = 0;
 			setup_signals(INTERACTIVE);
 			close(curr->heredoc_fd);
+			data->sig = HEREDOC_INT;
 			rl_event_hook = NULL;
 			free(line);
 			return (-2);
@@ -156,7 +157,6 @@ int ft_heredoc_parsing(t_token *curr, t_data *data)
 int handle_heredoc(t_token *head, t_data *data)
 {
 	t_token	*curr;
-	int		ret;
 
 	curr = head;
 	while (curr != NULL)

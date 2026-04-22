@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:52:21 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 17:43:32 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 13:50:22 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void ft_free_r(void **array, int i)
 }
 
 //free the linked list of tokens after execution is done
-void ft_free_tokens(t_token *head)
+void ft_free_tokens(t_token *head, t_data *data)
 {
 	t_token	*curr;
 	t_token	*temp;
@@ -53,6 +53,7 @@ void ft_free_tokens(t_token *head)
 		free(temp);
 	}
 	head = NULL;
+	data->head = NULL;
 }
 
 //cleanup function to free all allocated memory at the end of execution, including the linked list of tokens, the array of pids and the array of pipes
@@ -60,7 +61,7 @@ void ft_cleanup(t_token *head, t_data *data, int nmb_of_pipes)
 {
 	int	i;
 
-	ft_free_tokens(head);
+	ft_free_tokens(head, data);
 	free(data->pids);
 	i = 0;
 	while (i < nmb_of_pipes)
@@ -74,7 +75,7 @@ void ft_cleanup(t_token *head, t_data *data, int nmb_of_pipes)
 void ft_child_builtin_cleanup(t_data *data, char **arguments)
 {
 	ft_free_arr((void **)arguments);
-	ft_free_tokens(data->head);
+	ft_free_tokens(data->head, data);
 	ft_free_arr((void **)data->envp);
 	ft_free_r((void **)data->pipes, data->nmb_of_pipes - 1);
 	free(data->pids);

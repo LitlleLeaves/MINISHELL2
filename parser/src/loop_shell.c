@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/22 12:50:00 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 13:50:38 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		main_loop(t_data *data)
 	while (1)
 	{
 		free(data->line);
-		ft_free_tokens(data->head);
+		ft_free_tokens(data->head, data);
 		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
@@ -85,7 +85,7 @@ int		main_loop(t_data *data)
 			continue ;
 		if (data->shutdown != -1)
 		{
-			ft_free_tokens(data->head);
+			ft_free_tokens(data->head, data);
 			ft_free_arr((void **)data->envp);
 			rl_clear_history();
 			exit(data->exit_code);
@@ -99,8 +99,8 @@ int	execute_input(t_data *data)
 	if (data->head == NULL)
 		return (0);
 	if (handle_heredoc(data->head, data) < 0)
-		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head), -1);
+		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head, data), -1);
 	if (ft_start_exec(data->head, data) < 0)
-		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head), -1);
+		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head, data), -1);
 	return (0);
 }
