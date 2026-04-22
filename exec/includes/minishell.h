@@ -19,6 +19,10 @@
 #include <limits.h>
 #include <stdbool.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE  200
+# endif
+
 extern volatile sig_atomic_t signal_received;
 
 typedef enum e_sig_status
@@ -50,6 +54,8 @@ typedef enum	e_sig_kind
 	INTERACTIVE_KILL,
 	NOTHING,
 }               t_sig_kind;
+
+
 
 /* Backwards-compat aliases used across the codebase */
 #define REDIR_OUT_TRUNCT REDIR_OUT_TRUNC
@@ -249,5 +255,11 @@ int index_to_char(char *str, char c);
 void	setup_signals(t_sig_status	type);
 int		heredoc_signal_hook(void);
 int		interactive_signal_hook(void);
+
+size_t		ft_strlen(const char *str);
+char		*get_next_line(int fd);
+char		*ft_strchr(const char *str, int c);
+void		*ft_calloc(size_t nmemb, size_t size);
+char		*free_left(char **left);
 
 #endif
