@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/22 14:01:15 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 14:05:37 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	get_input(t_data *data)
 	data->current = data->head;
 	//print_tokenized_list(data);
 	free(data->line);
+	data->line = NULL;
 	return (0);
 }
 
@@ -64,6 +65,7 @@ int		main_loop(t_data *data)
 {
 	data->line = NULL;
 	data->head = NULL;
+	data->sig = NOTHING;
 	while (1)
 	{
 		free(data->line);
