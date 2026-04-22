@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:52:21 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/22 13:50:22 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 14:45:57 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,11 @@ void ft_child_builtin_cleanup(t_data *data, char **arguments)
 	ft_free_arr((void **)data->envp);
 	ft_free_r((void **)data->pipes, data->nmb_of_pipes - 1);
 	free(data->pids);
+}
+
+char	*free_left(char **left)
+{
+	free(*left);
+	*left = NULL;
+	return (NULL);
 }

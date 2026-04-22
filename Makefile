@@ -38,7 +38,8 @@ SRC_FILES_E := \
 	free.c \
 	ft_itoa.c \
 	heredoc.c \
-	expansion.c
+	expansion.c \
+	get
 
 BUILTINS_SRC_FILE_E := \
 	built_in.c \

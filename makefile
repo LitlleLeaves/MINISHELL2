@@ -40,6 +40,7 @@ SRC_FILES_E := \
 	free.c \
 	ft_itoa.c \
 	heredoc.c \
+	get_next_line.c
 
 
 # builtins sources
