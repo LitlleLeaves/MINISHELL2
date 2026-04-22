@@ -226,7 +226,8 @@ void ft_close_heredoc_fds(t_token *head);
 void	check_expansions(t_data *d);
 bool    convert_expansions(t_data *d, int start);
 char    *get_key(char *line, int start);
-bool    replace_key_in_line(t_data *d, char *value, int start, int val_len, int key_len);
+bool    replace_key_in_line(t_data *d, char *value, int start, int key_len);
+bool	remove_quotes_from_empty_key(t_data *d, int start);
 
 /* readline tering zooi wat enn kk functie*/
 char    *get_line(t_data *data);
@@ -239,6 +240,7 @@ t_token *if_redirection(t_data *d, int start, char *line, t_token_type type);
 t_token *if_word(t_data *d, int start, char *line);
 t_token *make_new_token(char *value, t_token_type type);
 t_token *if_quotes(t_data *d, char *line, int start);
+int		check_closed_quotes(char *line);
 
 /* misc */
 int index_to_char(char *str, char c);

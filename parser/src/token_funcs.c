@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_funcs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:36:59 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/20 15:21:37 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 20:46:28 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_token	*make_new_token(char *value, t_token_type type)
 		temp = NULL;
 	else
 	{
-		// temp = strdup(value); //debug veranderd want strdup doet all mallocen
 		temp = value;
 		if (!temp)
 			return (printf("value error"), NULL);
@@ -67,6 +66,54 @@ t_token	*if_quotes(t_data *d, char *line, int start)
 	return (make_new_token(value, WORD));
 }
 
+t_token	*make_word_token_with_quotes(t_data *d, char *line, int start)
+{
+	int		index;
+	char	*value;
+	int		length;
+	int		quote_index;
+
+	quote_index = 0;
+	index = 0;
+	length = 0;
+	while (line[index] != '\0' && check_delimeters(line[index]) == 0)
+	{
+		if (line[index] != '\'' || line[index] != '"')
+			length++;
+		index++;
+	}
+	value = ft_substr(line, start, index);
+	start += index;
+	index = 0;
+	while (value[quote_index + index] != '\0')
+	{
+		if (value[quote_index + index] == '\'' || value[quote_index + index] == '"')
+		{
+			value[quote_index + index] = value[quote_index + index + 1];
+			value[quote_index + index + 1] = value[quote_index + index + 2];
+			value[quote_index + index + 2] = value[quote_index + index + 3];
+			quote_index += 3;
+			printf("yewehere\n");
+		}
+		else
+			value[quote_index + index] = value[quote_index + index];
+		index++;
+	}
+	printf("%s\n", value);
+	d->index += index + start + 1;
+	return (make_new_token(value, WORD));
+}
+
+
+//char	*cut_empty_string_from_string(char *line, int start)
+//{
+//	int	index;
+	
+//	index = 0;
+//	while ()
+	
+//}
+
 t_token	*if_word(t_data *d, int start, char *line)
 {	
 	t_token	*token;
@@ -76,7 +123,10 @@ t_token	*if_word(t_data *d, int start, char *line)
 	index = 0;
 	if (line[start] == '\'' || line[start] == '"')
 	{
-		return (if_quotes(d, line, start));
+		if (line[start + 1] != line[start])
+			return (if_quotes(d, line, start));
+		else
+			return (make_word_token_with_quotes(d, line, start));
 	}
 	while (check_delimeters(line[index + start]) == 0 && line[index + start] != '\0' \
 			&& (line[index + start] != '\'' && line[index + start] != '"'))

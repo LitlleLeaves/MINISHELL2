@@ -41,7 +41,6 @@ SRC_FILES_E := \
 	ft_itoa.c \
 	heredoc.c \
 
-
 # builtins sources
 BUILTINS_SRC_FILES_E := \
 	built_in.c \
@@ -61,7 +60,8 @@ SRC_FILES_P := \
 	token_garbage.c \
 	expansion.c \
 	signal_funcs.c \
-	read_line.c
+	read_line.c \
+	quote_handling.c
 
 # object files
 OBJS_E := $(addprefix $(OBJ_DIR_E)/, $(SRC_FILES_E:.c=.o) $(BUILTINS_SRC_FILES_E:.c=.o))

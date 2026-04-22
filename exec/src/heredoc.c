@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/22 13:39:44 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 16:35:17 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char *ft_heredoc_replace_line(char *line, char *key, char *value, int start)
 		ft_memcpy(new_line, line, start);
 	ft_memcpy(new_line + start, value, value_len);
 	ft_memcpy(new_line + value_len + start, line + start + key_len + 1, \
-    ft_strlen(line) - start - key_len - 1);
+ft_strlen(line) - start - key_len - 1);
 	free(line);
 	return (new_line);
 }
@@ -147,6 +147,8 @@ int ft_heredoc_parsing(t_token *curr, t_data *data)
         write(curr->heredoc_fd, line, ft_strlen(line));
         write(curr->heredoc_fd, "\n", 1);
         free(line);
+		data->line = NULL;
+		line = NULL;
     }
     setup_signals(INTERACTIVE);
 	rl_event_hook = NULL;

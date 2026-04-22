@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/21 11:27:50 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/22 17:40:36 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,28 @@ void	check_expansions(t_data *d)
 			while (d->line[index] != '\'' && d->line[index] != '\0')
 				index++;
 		}
-		while (d->line[index] == '$')
+		while (d->line[index] == '$' && d->line[index + 1] != ' ')
 		{
-			convert_expansions(d, index);
+				convert_expansions(d, index);
 		}
 		index++;
 	}
 }
+
+//bool	remove_quotes_from_empty_key(t_data *d, int start)
+//{
+	//char	*new;
+	//int		total_len;
+//
+	//total_len = ft_strlen(d->line);
+	//new = malloc(ft_strlen(d->line) - 1);
+	//ft_strlcpy(new, d->line, start);
+	//new[start] = '$';
+	//ft_strlcat(new, d->line + start + 1, total_len);
+	//free(d->line);
+	//d->line = new;
+	//return (true);
+//}
 
 char	*get_key(char *line, int start)
 {
@@ -42,8 +57,9 @@ char	*get_key(char *line, int start)
 	char	*key;
 
 	index = 1;
-	//if (line[start + index] == '\'' || line[start + index] == '"')
-		//return (); moete ff kieke of we quotes zien als vlaide keys anders word dit n error
+//	if ((line[start + index] == '\'' && line[start - 1] == '\'')\
+//|| (line[start + index] == '"' && line[start - 1] == '"') )
+		//return (printf("jatoch\n"), NULL);
 	while (line[start + index] != '\0' && check_delimeters(line[start + index]) == 0 && \
 			line[start +index] != '"' && line[start +index] != '\'')
 		index++;
@@ -66,7 +82,7 @@ bool	convert_expansions(t_data *d, int start)
 	if (d->line[start] == '?')
 	{
 		value = ft_itoa(d->exit_code);
-		check = replace_key_in_line(d, value, start - 1, ft_strlen(value), 1);
+		check = replace_key_in_line(d, value, start, 1);
 		return (free(value), check);
 	}
 	key = get_key(d->line, start);
@@ -75,49 +91,33 @@ bool	convert_expansions(t_data *d, int start)
 	free(key);
 	if (!value)
 	{
-		if (replace_key_in_line(d, " ", start - 1, 1, key_length) == false)
+		if (replace_key_in_line(d, " ", start, key_length) == false)
 			d->line = NULL;
 		return (false);
 	}
 	length = ft_strlen(value);
-	if (replace_key_in_line(d, value, start - 1, length, key_length) == false)
+	if (replace_key_in_line(d, value, start, key_length) == false)
 		return (printf("ERROR\n"), false);
 	return (true);
 }
 
-bool	replace_key_in_line(t_data *d, char *value, int start, int val_len, int key_len)
+bool	replace_key_in_line(t_data *d, char *value, int start, int key_len)
 {
-	int		index;
 	char	*new;
-	int		old_len;
-	int		tot_len;
-	int		val_index;
-	int		len_diff;
+	int		val_len;
+	int		old_length;
+	int		total_len;
 
-	val_index = 0;
-	index = 0;
-	old_len = ft_strlen(d->line);
-	len_diff = (val_len - key_len) - 1;
-	if (key_len == old_len && !value)
-		return (false);
-	tot_len = len_diff + old_len;
-	new = ft_calloc(tot_len + 1, sizeof(char));
+	old_length = ft_strlen(d->line);
+	val_len = ft_strlen(value);
+	total_len = (val_len - key_len) - 1 + old_length;
+	new = malloc(total_len + 1);
 	if (!new)
-		return (printf("mallocerror\n"), false);
-	while (index < start)
-	{
-		new[index] = d->line[index];
-		index++;
-	}
-	while (index < start + val_len)
-		new[index++] = value[val_index++];
-	while (index < tot_len)
-	{
-		new[index] = d->line[index - len_diff];
-		index++;
-	}
-	new[index] = '\0';
-	// printf("%s\n", new);
+		return (false);
+	ft_strlcpy(new, d->line, start);
+	if (value)
+		ft_strlcat(new, value, val_len + start);
+	ft_strlcat(new, d->line + start + key_len, total_len);
 	free(d->line);
 	d->line = new;
 	return (true);
