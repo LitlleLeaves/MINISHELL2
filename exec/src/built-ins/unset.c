@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 13:22:09 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/08 16:36:21 by jjhurry          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   unset.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/04/03 13:22:09 by jjhurry       #+#    #+#                 */
+/*   Updated: 2026/04/23 10:39:55 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+void ft_unset_helper(char **args, t_data *data, int j)
+{
+		free(data->envp[j]);
+		j++;
+		while (data->envp[j] != NULL)
+		{
+			data->envp[j - 1] = data->envp[j];
+			j++;
+		}
+		data->envp[j - 1] = NULL;
+}
 
 void ft_unset(char **args, t_data *data)
 {
@@ -23,19 +35,11 @@ void ft_unset(char **args, t_data *data)
 		j = 0;
 		while (data->envp[j] != NULL)
 		{
-			
 			if (ft_strncmp(args[i], data->envp[j], ft_strlen(args[i] )) == 0 && \
 (data->envp[j][ft_strlen(args[i])] == '=' || \
 data->envp[j][ft_strlen(args[i])] == '\0'))
 			{
-				free(data->envp[j]);
-				j++;
-				while (data->envp[j] != NULL)
-				{
-					data->envp[j - 1] = data->envp[j];
-					j++;
-				}
-				data->envp[j - 1] = NULL;
+				ft_unset_helper(args, data, j);
 				break ;
 			}
 			j++;

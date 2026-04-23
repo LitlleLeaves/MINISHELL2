@@ -1,30 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:31:15 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 17:30:52 by jjhurry          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   export.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/31 14:31:15 by jjhurry       #+#    #+#                 */
+/*   Updated: 2026/04/23 10:31:34 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-//print declare -x <string> for each env member
-int ft_export_print_list(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->envp[i] != NULL)
-	{
-		printf("declare -x %s\n", data->envp[i]);
-		i++;
-	}
-	return (0);
-}
 
 static int ft_export_valid_char(char c)
 {
@@ -74,6 +61,15 @@ static int ft_key_value_helper(char *argument, t_data *data)
 	return (res);	
 }
 
+void ft_not_valid_checker(int i, char **arguments, t_data *data)
+{
+	write(2, "Minishell: export: `", 20);
+	write(2, arguments[i], strlen(arguments[i]));
+	write(2, "': not a valid identifier\n", 26);
+	data->exit_code = 1;
+	i++;
+}
+
 //add either a key or key and value pair to env
 int ft_add_to_export_list(char **arguments, t_data *data)
 {
@@ -83,14 +79,10 @@ int ft_add_to_export_list(char **arguments, t_data *data)
 	i = 1;
 	while (arguments[i] != NULL)
 	{
-		// printf("%s\n", arguments[i]); // debug
 		if (ft_export_validity_checker(arguments[i]) == 0)
 		{
-			write(2, "Minishell: export: `", 20);
-			write(2, arguments[i], strlen(arguments[i]));
-			write(2, "': not a valid identifier\n", 26);
-			data->exit_code = 1;
-			i++;	
+			ft_not_valid_checker(i ,arguments, data);
+			i++;
 			continue ;
 		}
 		if (ft_strchr(arguments[i], '=') == NULL)

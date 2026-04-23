@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/22 13:50:02 by jjhurry          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/10 11:14:47 by jjhurry       #+#    #+#                 */
+/*   Updated: 2026/04/23 11:01:07 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,10 @@ static int ft_wait_all_children(t_data *data, int nmb_of_pipes)
     int   last_status = 0;
 
     last_pid = data->pids[nmb_of_pipes];
-
     i = 0;
     while (i < nmb_of_pipes + 1)
     {
         pid_t pid = waitpid(data->pids[i], &status, 0);
-        // if (pid == -1)
-        // {
-        //     
-        // }
         if (pid == last_pid)
             last_status = status;
         i++;
@@ -77,6 +72,17 @@ int	ft_fork_process(t_token *head, t_data *data, int nmb_of_pipes)
 	return (1);
 }
 
+void ft_no_word_redir_help(t_token *curr, int *in)
+{
+	while (curr != NULL)
+	{
+		if (curr->type == REDIR_IN)
+			if (ft_handle_in(&in, curr) < 0)
+				return ;
+		curr = curr->next;
+	}
+}
+
 void ft_no_word_redirection(t_token *head)
 {
 	t_token	*curr;
@@ -86,13 +92,7 @@ void ft_no_word_redirection(t_token *head)
 	curr = head;
 	in = -2;
 	out = -2;
-	while (curr != NULL)
-	{
-		if (curr->type == REDIR_IN)
-			if (ft_handle_in(&in, curr) < 0)
-				return ;
-		curr = curr->next;
-	}
+	ft_no_word_redir_help(curr, &in);
 	curr = head;
 	while (curr != NULL)
 	{

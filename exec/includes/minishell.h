@@ -173,6 +173,10 @@ char *ft_make_executable(char *executable, t_data *data);
 void ft_check_builtins(t_exec_info *exec_info, t_data *data, char **arguments);
 char *ft_decide_executable(char *command, t_data *data);
 
+/*executable_relative.c*/
+char *ft_relative_executable(char *command);
+void ft_relative_executable_help(char *command);
+
 /* builtins */
 void ft_builtin_cd(t_exec_info *exec_info, t_data *data, char **arguments);
 void ft_builtin_export(t_data *data, char **arguments);
@@ -197,6 +201,10 @@ void ft_builtin_single_cd(int words, char **arguments, t_data *data);
 int ft_builtin_single_pwd(t_data *data);
 void ft_builtin_single_env(char **arguments, t_data *data);
 
+/*single_builtin_fds.c*/
+int ft_single_redirection(t_token *curr, int *fd_in, int *fd_out, t_data *data);
+void	ft_builtin_fds(t_single_fds fds, int words, char **arguments, t_data *data);
+
 /* cd.c */
 int ft_cd_no_arguments(t_data *data);
 int ft_cd_one_argument(char **arguments, t_data *data);
@@ -219,6 +227,7 @@ int ft_echo_newline(char **arguments, int i);
 int ft_echo_no_arguments();
 int ft_echo_no_newline(char **arguments, int i);
 int ft_check_echo_option(char **arguments);
+int ft_export_print_list(t_data *data);
 
 /* ft_atol / ft_itoa */
 int	ft_exit_code_atol(const char *ptr);
