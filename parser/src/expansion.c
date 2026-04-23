@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expansion.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/22 20:53:07 by side-lan         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   expansion.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: side-lan <side-lan@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/04/04 17:23:46 by side-lan      #+#    #+#                 */
+/*   Updated: 2026/04/23 11:47:09 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*get_key(char *line, int start)
 	char	*key;
 
 	index = 1;
-//	if ((line[start + index] == '\'' && line[start - 1] == '\'')\
+//	if ((line[start + index] == '\'' && line[start - 1] == '\'')
 //|| (line[start + index] == '"' && line[start - 1] == '"') )
 		//return (printf("jatoch\n"), NULL);
 	while (line[start + index] != '\0' && check_delimeters(line[start + index]) == 0 && \
@@ -74,7 +74,6 @@ bool	convert_expansions(t_data *d, int start)
 {
 	char	*key;
 	char	*value;
-	int		length;
 	int		key_length;
 	bool	check;
 
@@ -95,7 +94,6 @@ bool	convert_expansions(t_data *d, int start)
 			d->line = NULL;
 		return (false);
 	}
-	length = ft_strlen(value);
 	if (replace_key_in_line(d, value, start, key_length) == false)
 		return (printf("ERROR\n"), false);
 	return (true);

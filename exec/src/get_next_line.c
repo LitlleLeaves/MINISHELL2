@@ -56,7 +56,7 @@ static char	*find_in_buffer(char *buffer)
 
 static char	*read_buffer(int fd, char	*left, ssize_t *read_bytes)
 {
-	char *buffer;
+	char	*buffer;
 
 	buffer = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (!buffer)

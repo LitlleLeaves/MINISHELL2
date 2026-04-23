@@ -41,7 +41,7 @@ SRC_FILES_E := \
 	ft_itoa.c \
 	heredoc.c \
 	get_next_line.c \
-	executable_relative.c
+	executable_relative.c \
 
 # builtins sources
 BUILTINS_SRC_FILES_E := \
@@ -55,7 +55,7 @@ BUILTINS_SRC_FILES_E := \
 	single_builtin_execution.c \
 	unset.c \
 	single_builtin_fds.c \
-	export2.c
+	export_2.c
 
 # parser sources
 SRC_FILES_P := \

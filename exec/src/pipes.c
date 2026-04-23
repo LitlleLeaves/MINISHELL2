@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipes.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 11:53:26 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/08 16:40:00 by jjhurry          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   pipes.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/10 11:53:26 by jjhurry       #+#    #+#                 */
+/*   Updated: 2026/04/23 11:13:18 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-//closes all pipes so the system knows that there is no more data to read, and the childs can exit
-void ft_close_all_pipes(t_data *data, int nmb_of_pipes)
+/*closes all pipes so the system knows that there is no more data to read,
+and the childs can exit*/
+void	ft_close_all_pipes(t_data *data, int nmb_of_pipes)
 {
 	int	i;
 
@@ -36,7 +37,7 @@ int	ft_find_pipes(t_token *head)
 	if (curr == NULL)
 		return (-1);
 	nmb_of_pipes = 0;
-	while(curr != NULL)
+	while (curr != NULL)
 	{
 		if (curr->type == PIPE)
 			nmb_of_pipes++;
@@ -46,7 +47,7 @@ int	ft_find_pipes(t_token *head)
 }
 
 //initilise the arrays to store pids and pipes, and create the pipes
-int ft_create_pipes_and_pids(int nmb_of_pipes, t_data *data)
+int	ft_create_pipes_and_pids(int nmb_of_pipes, t_data *data)
 {
 	int	i;
 
@@ -69,8 +70,9 @@ int ft_create_pipes_and_pids(int nmb_of_pipes, t_data *data)
 	return (1);
 }
 
-//set up the write and read pipesides, to stdin and stdout, except for the first read, and the last write side
-int ft_setup_pipes(t_data *data, int nmb_of_pipes, int i)
+/*set up the write and read pipesides, to stdin and stdout, 
+except for the first read, and the last write side*/
+int	ft_setup_pipes(t_data *data, int nmb_of_pipes, int i)
 {
 	int	j;
 
@@ -79,7 +81,7 @@ int ft_setup_pipes(t_data *data, int nmb_of_pipes, int i)
 	if (i < nmb_of_pipes)
 		dup2(data->pipes[i][1], STDOUT_FILENO);
 	j = 0;
-	while (j < nmb_of_pipes)	
+	while (j < nmb_of_pipes)
 	{
 		close(data->pipes[j][0]);
 		close(data->pipes[j][1]);

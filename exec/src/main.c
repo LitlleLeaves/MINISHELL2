@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/10 11:14:47 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 11:01:07 by jjhurry       ########   odam.nl         */
+/*   Updated: 2026/04/23 11:39:32 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void ft_no_word_redir_help(t_token *curr, int *in)
 	while (curr != NULL)
 	{
 		if (curr->type == REDIR_IN)
-			if (ft_handle_in(&in, curr) < 0)
+			if (ft_handle_in(in, curr) < 0)
 				return ;
 		curr = curr->next;
 	}

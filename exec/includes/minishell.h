@@ -191,6 +191,7 @@ int ft_check_single_builtin(char **arguments);
 int ft_check_builtins_before_fork(t_token *head, t_data *data);
 void ft_single_builtin(t_token *head, t_data *data);
 int ft_count_single_words(t_token *head);
+int ft_execute_single_builtin(int words, char **arguments, t_data *data);
 
 /* builtin_single.* */
 void ft_builtin_single_exit(int words, char **arguments, t_data *data);

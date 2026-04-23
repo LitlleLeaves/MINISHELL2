@@ -6,13 +6,13 @@
 /*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/03 13:22:09 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 10:39:55 by jjhurry       ########   odam.nl         */
+/*   Updated: 2026/04/23 11:40:48 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void ft_unset_helper(char **args, t_data *data, int j)
+void ft_unset_helper(t_data *data, int j)
 {
 		free(data->envp[j]);
 		j++;
@@ -39,7 +39,7 @@ void ft_unset(char **args, t_data *data)
 (data->envp[j][ft_strlen(args[i])] == '=' || \
 data->envp[j][ft_strlen(args[i])] == '\0'))
 			{
-				ft_unset_helper(args, data, j);
+				ft_unset_helper(data, j);
 				break ;
 			}
 			j++;

@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   child.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 12:53:09 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/20 13:21:04 by jjhurry          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   child.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/10 12:53:09 by jjhurry       #+#    #+#                 */
+/*   Updated: 2026/04/23 11:15:03 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include <errno.h>
 
-//handle execution failure, free arguments and exit with status 127
-void ft_execution_failure(char *executable, char **arguments)
-{
-	ft_free_arr((void **)arguments);
-	free(executable);
-	exit(127);
-}
-
-//find path in envp and build the argument list, then find executable path and execute
-void ft_child_execute(t_exec_info *exec_info, t_data *data)
+// //handle execution failure, free arguments and exit with status 127
+// void	ft_execution_failure(char *executable, char **arguments)
+// {
+// 	ft_free_arr((void **)arguments);
+// 	free(executable);
+// 	exit(127);
+// }
+/*find path in envp and build the argument list, 
+then find executable path and execute*/
+void	ft_child_execute(t_exec_info *exec_info, t_data *data)
 {
 	char	*executable;
 
 	if (exec_info->fd_in >= 0)
-    {
-        dup2(exec_info->fd_in, STDIN_FILENO);
-        close(exec_info->fd_in);
-    }
+	{
+		dup2(exec_info->fd_in, STDIN_FILENO);
+		close(exec_info->fd_in);
+	}
 	if (exec_info->fd_out >= 0)
-    {
-        dup2(exec_info->fd_out, STDOUT_FILENO);
-        close(exec_info->fd_out);
-    }
+	{
+		dup2(exec_info->fd_out, STDOUT_FILENO);
+		close(exec_info->fd_out);
+	}
 	ft_check_builtins(exec_info, data, exec_info->arguments);
 	executable = ft_decide_executable(exec_info->arguments[0], data);
 	if (executable == NULL)
@@ -48,7 +48,7 @@ void ft_child_execute(t_exec_info *exec_info, t_data *data)
 	exit(128);
 }
 
-int ft_build_arguments_array(t_exec_info *exec_info)
+int	ft_build_arguments_array(t_exec_info *exec_info)
 {
 	int		i;
 	t_token	*curr;
@@ -86,7 +86,8 @@ int	ft_child_start_execute(t_exec_info *exec_info ,t_data *data, int i)
 	ft_build_arguments_array(exec_info);
 	while (curr != exec_info->end && curr != NULL)
 	{
-		if (ft_apply_redirection(&exec_info->fd_in, &exec_info->fd_out, curr) < 0)
+		if (ft_apply_redirection(&exec_info->fd_in, \
+&exec_info->fd_out, curr) < 0)
 			return (ft_free_arr((void **)exec_info->arguments) ,-1);
 		curr = curr->next;
 	}
@@ -126,8 +127,8 @@ int ft_find_start_end(int i, t_exec_info *exec_info, t_token *head)
 	exec_info->end = end;
 	return (1);
 }
-
-//child process finds the start and end of its command, applies redirections, and executes the command
+/*child process finds the start and end of its command,
+applies redirections, and executes the command*/
 int	ft_child_process(t_token *head, t_data *data, int i)
 {
 	t_exec_info	exec_info;

@@ -6,14 +6,14 @@
 /*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/31 12:55:38 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 10:40:19 by jjhurry       ########   odam.nl         */
+/*   Updated: 2026/04/23 11:16:38 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-//function that parses the x= part of the env variables and returns onlue the value part
-char *ft_getenv(t_data *data, char *var)
+/*function that parses the x= part of the env variables
+and returns onlue the value part*/
+char	*ft_getenv(t_data *data, char *var)
 {
 	int		i;
 	size_t	len;
@@ -31,7 +31,7 @@ char *ft_getenv(t_data *data, char *var)
 }
 
 //create a new list of size+1 and copy and then add the new env variable
-int ft_extend_env(t_data *data, char *entry)
+int	ft_extend_env(t_data *data, char *entry)
 {
 	int		i;
 	char	**new_list;
@@ -39,7 +39,7 @@ int ft_extend_env(t_data *data, char *entry)
 	i = 0;
 	while (data->envp[i] != NULL)
 		i++;
-	new_list = ft_calloc(i + 2 , sizeof(char *));
+	new_list = ft_calloc(i + 2, sizeof(char *));
 	if (new_list == NULL)
 		return (-1);
 	i = 0;

@@ -6,13 +6,13 @@
 /*   By: jjhurry <jjhurry@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/23 10:42:25 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 10:42:46 by jjhurry       ########   odam.nl         */
+/*   Updated: 2026/04/23 11:18:44 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_relative_executable_help(char *command)
+void	ft_relative_executable_help(char *command)
 {
 	if (access(command, X_OK) == -1)
 	{
@@ -32,7 +32,7 @@ void ft_relative_executable_help(char *command)
 }
 
 //check whether the relative path exsists and if the file is executable
-char *ft_relative_executable(char *command)
+char	*ft_relative_executable(char *command)
 {
 	struct stat	st;
 

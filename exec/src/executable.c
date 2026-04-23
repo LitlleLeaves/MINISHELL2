@@ -6,14 +6,14 @@
 /*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/12 14:56:47 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 10:57:46 by jjhurry       ########   odam.nl         */
+/*   Updated: 2026/04/23 11:38:20 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include "exec.h"
 
-char *ft_exec_failure(t_data *data, char *executable, char **paths)
+char	*ft_exec_failure(t_data *data, char *executable, char **paths)
 {
 	ft_free_tokens(data->head, data);
 	write(2, executable, ft_strlen(executable));
@@ -22,8 +22,9 @@ char *ft_exec_failure(t_data *data, char *executable, char **paths)
 	exit(127);
 }
 
-//make a executable by looking through the path and finding if it is executable
-char *ft_make_executable(char *executable, t_data *data)
+/*make a executable by looking through 
+the path and finding if it is executable*/
+char	*ft_make_executable(char *executable, t_data *data)
 {
 	int		i;
 	char	**paths;
@@ -49,11 +50,12 @@ char *ft_make_executable(char *executable, t_data *data)
 		free(path);
 		free(exec);
 	}
-	ft_exec_failure(data, executable, paths);
+	return (ft_exec_failure(data, executable, paths), NULL);
 }
 
-//decide if the exucatble path is relative or if it needs to be found in the path, and return the executable path
-char *ft_decide_executable(char *command, t_data *data)
+/*decide if the exucatble path is relative or if it needs 
+to be found in the path, and return the executable path*/
+char	*ft_decide_executable(char *command, t_data *data)
 {
 	char	*executable;
 
@@ -65,20 +67,20 @@ char *ft_decide_executable(char *command, t_data *data)
 }
 
 //choose executable is a built in or regular executable, and execute it
-void ft_check_builtins(t_exec_info *exec_info, t_data *data, char **arguments)
+void	ft_check_builtins(t_exec_info *exec_info, t_data *data, char **args)
 {
-	if (ft_strncmp(arguments[0], "cd", 2) == 0)
-		ft_builtin_cd(exec_info, data, arguments);
-	else if (ft_strncmp(arguments[0], "export", 6) == 0)
-		ft_builtin_export(data, arguments);
-	else if (ft_strncmp(arguments[0], "unset", 5) == 0)
-		ft_builtin_unset(data, arguments);
-	else if (ft_strncmp(arguments[0], "echo", 4) == 0)
-		ft_builtin_echo(data, arguments);
-	else if (ft_strncmp(arguments[0], "exit", 4) == 0)
-		ft_builtin_exit(exec_info ,data, arguments);
-	else if (ft_strncmp(arguments[0], "env", 3) == 0)
-		ft_builtin_env(data, arguments);
-	else if (ft_strncmp(arguments[0], "pwd", 3) == 0)
-		ft_builtin_pwd(data, arguments);
+	if (ft_strncmp(args[0], "cd", 2) == 0)
+		ft_builtin_cd(exec_info, data, args);
+	else if (ft_strncmp(args[0], "export", 6) == 0)
+		ft_builtin_export(data, args);
+	else if (ft_strncmp(args[0], "unset", 5) == 0)
+		ft_builtin_unset(data, args);
+	else if (ft_strncmp(args[0], "echo", 4) == 0)
+		ft_builtin_echo(data, args);
+	else if (ft_strncmp(args[0], "exit", 4) == 0)
+		ft_builtin_exit(exec_info, data, args);
+	else if (ft_strncmp(args[0], "env", 3) == 0)
+		ft_builtin_env(data, args);
+	else if (ft_strncmp(args[0], "pwd", 3) == 0)
+		ft_builtin_pwd(data, args);
 }
