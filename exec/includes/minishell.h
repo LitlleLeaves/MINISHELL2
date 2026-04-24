@@ -145,7 +145,6 @@ char    *ft_substr(char const *str, int start, int length);
 int     ft_isalnum(int c);
 void    *ft_memcpy(void *to, const void*from, size_t bytes);
 
-/* exec-only helper prototypes (hidden when compiling parser) */
 void    *ft_calloc(size_t nmemb, size_t size);
 int     check_delimeters(char c);
 char    *ft_strjoin(char const *s1, char const *s2);
@@ -271,5 +270,10 @@ char		*get_next_line(int fd);
 char		*ft_strchr(const char *str, int c);
 void		*ft_calloc(size_t nmemb, size_t size);
 char		*free_left(char **left);
+char		*free_left(char **left);
+
+/*wait children.c*/
+int	ft_wait_all_children(t_data *data, int nmb_of_pipes);
+
 
 #endif

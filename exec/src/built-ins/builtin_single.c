@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 14:28:04 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 11:58:02 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/24 12:46:52 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <limits.h>
 
-void ft_builtin_single_cd(int words, char **arguments, t_data *data)
+void	ft_builtin_single_cd(int words, char **arguments, t_data *data)
 {
 	if (words > 2)
 	{
@@ -27,7 +27,7 @@ void ft_builtin_single_cd(int words, char **arguments, t_data *data)
 		data->exit_code = ft_cd_one_argument(arguments, data);
 }
 
-void ft_builtin_single_export(char **arguments, t_data *data)
+void	ft_builtin_single_export(char **arguments, t_data *data)
 {
 	if (arguments[1] == NULL)
 		ft_export_print_list(data);
@@ -35,15 +35,15 @@ void ft_builtin_single_export(char **arguments, t_data *data)
 		ft_add_to_export_list(arguments, data);
 }
 
-void ft_builtin_single_unset(char **arguments, t_data *data)
+void	ft_builtin_single_unset(char **arguments, t_data *data)
 {
-		if (arguments[1] == NULL)
-			return ;
-		else
-			ft_unset(arguments, data);
+	if (arguments[1] == NULL)
+		return ;
+	else
+		ft_unset(arguments, data);
 }
 
-void ft_builtin_single_echo(char **arguments, t_data *data)
+void	ft_builtin_single_echo(char **arguments, t_data *data)
 {
 	if (arguments[1] == NULL)
 		data->exit_code = ft_echo_no_arguments();
@@ -53,10 +53,10 @@ void ft_builtin_single_echo(char **arguments, t_data *data)
 		data->exit_code = ft_echo_newline(arguments, 1);
 }
 
-void ft_builtin_single_exit(int words, char **arguments, t_data *data)
+void	ft_builtin_single_exit(int words, char **arguments, t_data *data)
 {
 	write(2, "exit\n", 5);
-	data->shutdown = 1;	
+	data->shutdown = 1;
 	if (words == 1)
 	{
 		data->exit_code = 0;
@@ -78,4 +78,3 @@ void ft_builtin_single_exit(int words, char **arguments, t_data *data)
 		}
 	}
 }
-

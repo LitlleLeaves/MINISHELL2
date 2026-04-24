@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   env_list.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/31 12:55:38 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 11:16:38 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   env_list.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/31 12:55:38 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/24 12:41:22 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_getenv(t_data *data, char *var)
 	len = ft_strlen(var);
 	while (data->envp[i] != NULL)
 	{
-		if (ft_strncmp(data->envp[i], var, len) == 0\
+		if (ft_strncmp(data->envp[i], var, len) == 0 \
 && data->envp[i][len] == '=')
 			return (data->envp[i] + len + 1);
 		i++;
@@ -58,7 +58,7 @@ int	ft_extend_env(t_data *data, char *entry)
 }
 
 //change a key/value pair if it exists otherwise add to the list
-int ft_change_env_key_value(char *key, char *value, t_data *data)
+int	ft_change_env_key_value(char *key, char *value, t_data *data)
 {
 	int		i;
 	int		len;
@@ -70,15 +70,15 @@ int ft_change_env_key_value(char *key, char *value, t_data *data)
 	if (entry == NULL)
 		return (-1);
 	ft_strlcpy(entry, key, len);
-	ft_strlcat(entry, "=", len );
-	ft_strlcat(entry, value, len );
+	ft_strlcat(entry, "=", len);
+	ft_strlcat(entry, value, len);
 	while (data->envp[i] != NULL)
 	{
-		if (ft_strncmp(data->envp[i], key, ft_strlen(key)) == 0\
+		if (ft_strncmp(data->envp[i], key, ft_strlen(key)) == 0 \
 && data->envp[i][ft_strlen(key)] == '=')
 		{
 			free(data->envp[i]);
-			return(data->envp[i] = entry, 1);
+			return (data->envp[i] = entry, 1);
 		}
 		i++;
 	}
@@ -86,7 +86,7 @@ int ft_change_env_key_value(char *key, char *value, t_data *data)
 }
 
 //change a value if already present, otherwise increase the env
-int ft_change_env_key(char *entry, t_data *data)
+int	ft_change_env_key(char *entry, t_data *data)
 {
 	int	i;
 
@@ -94,8 +94,9 @@ int ft_change_env_key(char *entry, t_data *data)
 	while (data->envp[i] != NULL)
 	{
 		if (ft_strncmp(data->envp[i], entry, ft_strlen(entry)) == 0 \
-&& (data->envp[i][ft_strlen(entry)] == '=' || data->envp[i][ft_strlen(entry)] == '\0'))
-		{		
+&& (data->envp[i][ft_strlen(entry)] == '=' \
+|| data->envp[i][ft_strlen(entry)] == '\0'))
+		{
 			return (free(entry), 1);
 		}
 		i++;

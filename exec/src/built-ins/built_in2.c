@@ -6,20 +6,20 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:29:24 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/08 16:33:16 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/24 12:47:02 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void ft_builtin_env(t_data *data, char **arguments)
+void	ft_builtin_env(t_data *data, char **arguments)
 {
 	int	i;
 
 	if (arguments[1] != NULL)
 	{
 		write(2, "wrong amount of arguments for env\n", 34);
-		data->exit_code = 1	;
+		data->exit_code = 1;
 	}
 	else
 	{
@@ -34,16 +34,16 @@ void ft_builtin_env(t_data *data, char **arguments)
 	exit(data->exit_code);
 }
 
-void ft_builtin_pwd(t_data *data, char **arguments)
+void	ft_builtin_pwd(t_data *data, char **arguments)
 {
 	char	*buff;
 	char	*pwd;
-	
+
 	pwd = ft_getenv(data, "PWD");
-    if (pwd != NULL)
-    {
-        printf("%s\n", pwd);
-    }
+	if (pwd != NULL)
+	{
+		printf("%s\n", pwd);
+	}
 	else
 	{
 		buff = getcwd(NULL, 0);

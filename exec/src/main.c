@@ -1,49 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/10 11:14:47 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 11:39:32 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/24 12:52:56 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-//parent process waits for all children to finish, and returns the exit status of the last one
-static int ft_wait_all_children(t_data *data, int nmb_of_pipes)
-{
-    int   i;
-    int   status;
-    pid_t last_pid;
-    int   last_status = 0;
-
-    last_pid = data->pids[nmb_of_pipes];
-    i = 0;
-    while (i < nmb_of_pipes + 1)
-    {
-        pid_t pid = waitpid(data->pids[i], &status, 0);
-        if (pid == last_pid)
-            last_status = status;
-        i++;
-    }
-    if (WIFEXITED(last_status))
-		data->exit_code = WEXITSTATUS(last_status);
-	else if (WIFSIGNALED(last_status))
-	{
-    	data->exit_code = 128 + WTERMSIG(last_status);
-    	if (WTERMSIG(last_status) == SIGINT)
-        	write(1, "\n", 1);
-    	if (WTERMSIG(last_status) == SIGQUIT)
-        	write(1, "Quit (core dumped)\n", 19);
-	}
-	return (data->exit_code);
-}
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-//small check for the exitcode so that we know wether the child exited because of the signal or due to something else
-//if the signal is the reason we should call an exit func 
 
 //fork a proces for each command
 int	ft_fork_process(t_token *head, t_data *data, int nmb_of_pipes)
@@ -72,7 +39,7 @@ int	ft_fork_process(t_token *head, t_data *data, int nmb_of_pipes)
 	return (1);
 }
 
-void ft_no_word_redir_help(t_token *curr, int *in)
+void	ft_no_word_redir_help(t_token *curr, int *in)
 {
 	while (curr != NULL)
 	{
@@ -83,7 +50,7 @@ void ft_no_word_redir_help(t_token *curr, int *in)
 	}
 }
 
-void ft_no_word_redirection(t_token *head)
+void	ft_no_word_redirection(t_token *head)
 {
 	t_token	*curr;
 	int		in;
@@ -107,8 +74,9 @@ void ft_no_word_redirection(t_token *head)
 	if (out > -1)
 		close(out);
 }
-
-//parent process sets up pipes and pids,check for single builtin and executes it or then forks the children, and waits for them to finish
+/*parent process sets up pipes and pids,
+check for single builtin and executes it
+or then forks the children, and waits for them to finish*/
 int ft_start_exec(t_token *head, t_data *data)
 {
 	int	nmb_of_pipes;
@@ -125,33 +93,13 @@ int ft_start_exec(t_token *head, t_data *data)
 		ft_free_tokens(head, data);
 		return (1);
 	}
-	if (ft_create_pipes_and_pids(nmb_of_pipes,data) < 0)
-		return (ft_free_tokens(head, data),-2);
+	if (ft_create_pipes_and_pids(nmb_of_pipes, data) < 0)
+		return (ft_free_tokens(head, data), -2);
 	if (ft_fork_process(head, data, nmb_of_pipes) < 0)
-		return (ft_free_tokens(head, data), ft_close_all_pipes(data, nmb_of_pipes),- 3);
+		return (ft_free_tokens(head, data), \
+ft_close_all_pipes(data, nmb_of_pipes), -3);
 	ft_close_all_pipes(data, nmb_of_pipes);
-	// ft_close_heredoc_fds(head);
 	ft_wait_all_children(data, nmb_of_pipes);
 	ft_cleanup(head, data, nmb_of_pipes);
-	return (1);
-}
-
-int ft_copy_envp(t_data *data, char **envp)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (envp[i] != NULL)
-		i++;
-	data->envp = ft_calloc(i + 1, sizeof(char *));
-	if (data->envp == NULL)
-		return (-1);
-	j = 0;
-	while (j < i)
-	{
-		data->envp[j] = ft_strdup(envp[j]);
-		j++;
-	}
 	return (1);
 }

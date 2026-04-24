@@ -6,13 +6,13 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:29:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/21 11:57:54 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/24 12:46:41 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void ft_builtin_cd(t_exec_info *exec_info, t_data *data, char **arguments)
+void	ft_builtin_cd(t_exec_info *exec_info, t_data *data, char **arguments)
 {
 	if (exec_info->words > 2)
 	{
@@ -28,7 +28,7 @@ void ft_builtin_cd(t_exec_info *exec_info, t_data *data, char **arguments)
 	exit (data->exit_code);
 }
 
-void ft_builtin_export(t_data *data, char **arguments)
+void	ft_builtin_export(t_data *data, char **arguments)
 {
 	if (arguments[1] == NULL)
 		ft_export_print_list(data);
@@ -38,16 +38,15 @@ void ft_builtin_export(t_data *data, char **arguments)
 	exit (data->exit_code);
 }
 
-void ft_builtin_unset(t_data *data, char **arguments)
+void	ft_builtin_unset(t_data *data, char **arguments)
 {
-
 	if (arguments[1] != NULL)
 		ft_unset(arguments, data);
 	ft_child_builtin_cleanup(data, arguments);
 	exit (0);
 }
 
-void ft_builtin_echo(t_data *data, char **arguments)
+void	ft_builtin_echo(t_data *data, char **arguments)
 {
 	if (arguments[1] == NULL)
 		data->exit_code = ft_echo_no_arguments();
@@ -59,10 +58,9 @@ void ft_builtin_echo(t_data *data, char **arguments)
 	exit(data->exit_code);
 }
 
-void ft_builtin_exit(t_exec_info *exec_info, t_data *data, char **arguments)
+void	ft_builtin_exit(t_exec_info *exec_info, t_data *data, char **arguments)
 {
-	
-	data->shutdown = 1;	
+	data->shutdown = 1;
 	if (exec_info->words == 1)
 	{
 		data->exit_code = 0;

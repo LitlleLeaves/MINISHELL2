@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   child.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/10 12:53:09 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 11:15:03 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   child.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/10 12:53:09 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/24 12:40:57 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_build_arguments_array(t_exec_info *exec_info)
 }
 
 //start execution of the command
-int	ft_child_start_execute(t_exec_info *exec_info ,t_data *data, int i)
+int	ft_child_start_execute(t_exec_info *exec_info, t_data *data, int i)
 {
 	t_token	*curr;
 
@@ -88,7 +88,7 @@ int	ft_child_start_execute(t_exec_info *exec_info ,t_data *data, int i)
 	{
 		if (ft_apply_redirection(&exec_info->fd_in, \
 &exec_info->fd_out, curr) < 0)
-			return (ft_free_arr((void **)exec_info->arguments) ,-1);
+			return (ft_free_arr((void **)exec_info->arguments), -1);
 		curr = curr->next;
 	}
 	if (exec_info->arguments != NULL)
@@ -99,7 +99,7 @@ int	ft_child_start_execute(t_exec_info *exec_info ,t_data *data, int i)
 }
 
 //find start and end of command
-int ft_find_start_end(int i, t_exec_info *exec_info, t_token *head)
+int	ft_find_start_end(int i, t_exec_info *exec_info, t_token *head)
 {
 	int		counter;
 	t_token	*start;
@@ -127,6 +127,7 @@ int ft_find_start_end(int i, t_exec_info *exec_info, t_token *head)
 	exec_info->end = end;
 	return (1);
 }
+
 /*child process finds the start and end of its command,
 applies redirections, and executes the command*/
 int	ft_child_process(t_token *head, t_data *data, int i)
@@ -135,7 +136,7 @@ int	ft_child_process(t_token *head, t_data *data, int i)
 
 	if (ft_find_start_end(i, &exec_info, head) < 0)
 		return (-1);
-	if (ft_child_start_execute(&exec_info ,data, i) < 0)
+	if (ft_child_start_execute(&exec_info, data, i) < 0)
 		return (-3);
 	return (1);
 }

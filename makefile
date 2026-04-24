@@ -33,6 +33,8 @@ SRC_FILES_E := \
 	ft_split.c \
 	ft_strjoin.c \
 	helper.c \
+	helper2.c \
+	helper3.c \
 	main.c \
 	pipes.c \
 	redirection.c \
@@ -41,7 +43,9 @@ SRC_FILES_E := \
 	ft_itoa.c \
 	heredoc.c \
 	get_next_line.c \
+	gnlhelper.c \
 	executable_relative.c \
+	wait_child.c
 
 # builtins sources
 BUILTINS_SRC_FILES_E := \

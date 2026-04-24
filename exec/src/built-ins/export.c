@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   export.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/31 14:31:15 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 10:31:34 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/31 14:31:15 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/24 12:36:15 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-
-static int ft_export_valid_char(char c)
+static int	ft_export_valid_char(char c)
 {
 	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
 		|| (c >= 'A' && c <= 'Z') || c == '_')
@@ -21,7 +20,7 @@ static int ft_export_valid_char(char c)
 	return (0);
 }
 
-int ft_export_validity_checker(char *str)
+int	ft_export_validity_checker(char *str)
 {
 	int	i;
 
@@ -30,7 +29,7 @@ int ft_export_validity_checker(char *str)
 		return (0);
 	if (ft_isdigit(str[0]) == 1 || str[0] == '\0')
 		return (0);
-	while(str[i] != '\0' && str[i] != '=')
+	while (str[i] != '\0' && str[i] != '=')
 	{
 		if (ft_export_valid_char(str[i]) == 0)
 			return (0);
@@ -40,7 +39,7 @@ int ft_export_validity_checker(char *str)
 }
 
 //helper function
-static int ft_key_value_helper(char *argument, t_data *data)
+static int	ft_key_value_helper(char *argument, t_data *data)
 {
 	char	*key;
 	char	*value;
@@ -58,10 +57,10 @@ static int ft_key_value_helper(char *argument, t_data *data)
 	res = ft_change_env_key_value(key, value, data);
 	free(key);
 	free(value);
-	return (res);	
+	return (res);
 }
 
-void ft_not_valid_checker(int i, char **arguments, t_data *data)
+void	ft_not_valid_checker(int i, char **arguments, t_data *data)
 {
 	write(2, "Minishell: export: `", 20);
 	write(2, arguments[i], strlen(arguments[i]));
@@ -71,7 +70,7 @@ void ft_not_valid_checker(int i, char **arguments, t_data *data)
 }
 
 //add either a key or key and value pair to env
-int ft_add_to_export_list(char **arguments, t_data *data)
+int	ft_add_to_export_list(char **arguments, t_data *data)
 {
 	int		i;
 	char	*entry;
@@ -81,7 +80,7 @@ int ft_add_to_export_list(char **arguments, t_data *data)
 	{
 		if (ft_export_validity_checker(arguments[i]) == 0)
 		{
-			ft_not_valid_checker(i ,arguments, data);
+			ft_not_valid_checker(i, arguments, data);
 			i++;
 			continue ;
 		}
@@ -89,14 +88,13 @@ int ft_add_to_export_list(char **arguments, t_data *data)
 		{
 			entry = ft_strdup(arguments[i]);
 			if (entry == NULL)
-				return (data->shutdown = 1 ,-1);
+				return (data->shutdown = 1, -1);
 			ft_change_env_key(entry, data);
 		}
 		else
 			if (ft_key_value_helper(arguments[i], data) < 0)
-				return (data->shutdown = 1 ,-1);
+				return (data->shutdown = 1, -1);
 		i++;
 	}
 	return (1);
 }
-	
