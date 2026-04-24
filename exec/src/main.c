@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:52:56 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/24 12:58:16 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,25 @@ ft_close_all_pipes(data, nmb_of_pipes), -3);
 	ft_close_all_pipes(data, nmb_of_pipes);
 	ft_wait_all_children(data, nmb_of_pipes);
 	ft_cleanup(head, data, nmb_of_pipes);
+	return (1);
+}
+
+int ft_copy_envp(t_data *data, char **envp)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (envp[i] != NULL)
+		i++;
+	data->envp = ft_calloc(i + 1, sizeof(char *));
+	if (data->envp == NULL)
+		return (-1);
+	j = 0;
+	while (j < i)
+	{
+		data->envp[j] = ft_strdup(envp[j]);
+		j++;
+	}
 	return (1);
 }
