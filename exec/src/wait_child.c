@@ -6,13 +6,13 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:52:17 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:54:22 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/24 13:00:06 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_last_exitstatus(t_data *data, int last_status)
+void	ft_last_exitstatus(t_data *data, int last_status)
 {
 	if (WIFEXITED(last_status))
 		data->exit_code = WEXITSTATUS(last_status);
@@ -35,7 +35,7 @@ int	ft_wait_all_children(t_data *data, int nmb_of_pipes)
 	pid_t	last_pid;
 	int		last_status;
 	pid_t	pid;
-	
+
 	last_status = 0;
 	last_pid = data->pids[nmb_of_pipes];
 	i = 0;

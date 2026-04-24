@@ -29,7 +29,8 @@ SRC_FILES_E := \
 	dummy.c \
 	env_list.c \
 	executable.c \
-	ft_atol.c \
+	ft_exitcode_atol.c \
+	ft_atoi.c \
 	ft_split.c \
 	ft_strjoin.c \
 	helper.c \

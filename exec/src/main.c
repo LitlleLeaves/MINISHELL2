@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:58:16 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/24 15:23:28 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_no_word_redirection(t_token *head)
 	if (out > -1)
 		close(out);
 }
+
 /*parent process sets up pipes and pids,
 check for single builtin and executes it
 or then forks the children, and waits for them to finish*/
@@ -104,10 +105,11 @@ ft_close_all_pipes(data, nmb_of_pipes), -3);
 	return (1);
 }
 
-int ft_copy_envp(t_data *data, char **envp)
+int	ft_copy_envp(t_data *data, char **envp)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*shlvl;
 
 	i = 0;
 	while (envp[i] != NULL)
@@ -120,6 +122,12 @@ int ft_copy_envp(t_data *data, char **envp)
 	{
 		data->envp[j] = ft_strdup(envp[j]);
 		j++;
+	}
+	shlvl = ft_getenv(data, "SHLVL");
+	if (shlvl == NULL)
+	{
+		ft_change_env_key_value("SHLVL", "1", data);
+		data->level = 1;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:53:09 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:40:57 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/24 15:26:02 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@
 // 	free(executable);
 // 	exit(127);
 // }
+
+int	ft_increase_shlvl(t_data *data)
+{
+	char	*shlvl;
+
+	data->level++;
+	shlvl = ft_itoa(data->level + 1);
+	if (shlvl == NULL)
+		return (-1);
+	ft_change_env_key_value("SHLVL", shlvl, data);
+	free(shlvl);
+	return (1);
+}
+
 /*find path in envp and build the argument list, 
 then find executable path and execute*/
 void	ft_child_execute(t_exec_info *exec_info, t_data *data)
@@ -84,6 +98,9 @@ int	ft_child_start_execute(t_exec_info *exec_info, t_data *data, int i)
 	exec_info->command_number = i;
 	curr = exec_info->start;
 	ft_build_arguments_array(exec_info);
+	if (ft_strncmp(exec_info->arguments[0], "./minishell", 12) == 0)
+		if (ft_increase_shlvl(data) < 0)
+				return (ft_free_arr((void **)exec_info->arguments), -2);
 	while (curr != exec_info->end && curr != NULL)
 	{
 		if (ft_apply_redirection(&exec_info->fd_in, \

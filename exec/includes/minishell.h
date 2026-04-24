@@ -93,17 +93,17 @@ typedef struct s_single_fds
 typedef struct s_data
 {
 	    /* exec-related */
-    int    			 **pipes;
-    pid_t  			 *pids;
-    char   			 **envp;
-    long   			 shutdown;
-    int    			 exit_code;
-    t_token			 *head;
-    int    		 	nmb_of_pipes;
-    char   			 *line;
-    int    			 index;
-	int				level;
-	t_sig_kind		sig;
+    int			**pipes;
+    pid_t		*pids;
+    char		**envp;
+    long		shutdown;
+    int			exit_code;
+    t_token		*head;
+    int			nmb_of_pipes;
+    char		*line;
+    int			index;
+	int			level;
+	t_sig_kind	sig;
 	    /* parser-related */
     int     		shell_level;
     t_token 		*current;
@@ -232,6 +232,7 @@ int ft_export_print_list(t_data *data);
 /* ft_atol / ft_itoa */
 int	ft_exit_code_atol(const char *ptr);
 char *ft_itoa(int n);
+int	ft_atoi(const char *ptr);
 
 /* heredoc */
 int handle_heredoc(t_token *head, t_data *data);
