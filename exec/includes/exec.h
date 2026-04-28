@@ -47,7 +47,7 @@
 //     REDIR_OUT_TRUNCT, 		// >
 //     REDIR_OUT_APPEND,		// >>
 //     REDIR_IN,				// <
-//     HEREDOC_EXPANSION,		// << eof
+//     HEREDOC,		// << eof
 // 	HEREDOC_NO_EXPANSION,	// << 'eof' || << "eof"
 // 	ENVIRONMENT,
 // }				t_token_type;

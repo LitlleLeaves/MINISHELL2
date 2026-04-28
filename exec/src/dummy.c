@@ -25,7 +25,7 @@ t_token	*ft_get_head()
         char *value;
         t_token_type type;
     } token_data[] = {
-        {"eof", HEREDOC_EXPANSION},
+        {"eof", HEREDOC},
 		// {"infile", REDIR_IN},
         {"grep", WORD},
 		{"j", WORD},

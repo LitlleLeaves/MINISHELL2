@@ -23,7 +23,7 @@
 #  define BUFFER_SIZE  200
 # endif
 
-extern volatile sig_atomic_t signal_received;
+extern volatile sig_atomic_t g_signal_received;
 
 typedef enum e_sig_status
 {
@@ -41,7 +41,7 @@ typedef enum	e_token_type
     REDIR_OUT_TRUNC,   /* >  canonical */
     REDIR_OUT_APP,     /* >> canonical */
     REDIR_IN,          /* < */
-    HEREDOC_EXPANSION, /* << eof */
+    HEREDOC, /* << eof */
     HEREDOC_NO_EXPANSION, /* << 'eof' || << "eof" */
 
     ENVIRONMENT,

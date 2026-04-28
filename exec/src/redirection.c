@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 12:04:50 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:46:15 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/28 19:58:28 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	ft_apply_redirection(int *fd_in, int *fd_out, t_token *curr)
 {
 	if (curr->type == REDIR_IN)
 		return (ft_handle_in(fd_in, curr));
-	else if (curr->type == HEREDOC_EXPANSION \
+	else if (curr->type == HEREDOC \
 || curr->type == HEREDOC_NO_EXPANSION)
 		return (ft_handle_in_heredoc(fd_in, curr));
 	else if (curr->type == REDIR_OUT_APPEND)

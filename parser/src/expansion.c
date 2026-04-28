@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   expansion.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: side-lan <side-lan@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/04/04 17:23:46 by side-lan      #+#    #+#                 */
-/*   Updated: 2026/04/23 11:47:09 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
+/*   Updated: 2026/04/28 20:37:49 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h" 
 
 void	check_expansions(t_data *d)
 {
-	int		index;
-	// bool	check;
+	int	index;
 
 	index = 0;
 	while (d->line[index] != '\0')
 	{
-
 		if (d->line[index] == '\'')
 		{
 			index++;
@@ -30,26 +27,11 @@ void	check_expansions(t_data *d)
 		}
 		while (d->line[index] == '$' && d->line[index + 1] != ' ')
 		{
-				convert_expansions(d, index);
+			convert_expansions(d, index);
 		}
 		index++;
 	}
 }
-
-//bool	remove_quotes_from_empty_key(t_data *d, int start)
-//{
-	//char	*new;
-	//int		total_len;
-//
-	//total_len = ft_strlen(d->line);
-	//new = malloc(ft_strlen(d->line) - 1);
-	//ft_strlcpy(new, d->line, start);
-	//new[start] = '$';
-	//ft_strlcat(new, d->line + start + 1, total_len);
-	//free(d->line);
-	//d->line = new;
-	//return (true);
-//}
 
 char	*get_key(char *line, int start)
 {
@@ -57,14 +39,11 @@ char	*get_key(char *line, int start)
 	char	*key;
 
 	index = 1;
-//	if ((line[start + index] == '\'' && line[start - 1] == '\'')
-//|| (line[start + index] == '"' && line[start - 1] == '"') )
-		//return (printf("jatoch\n"), NULL);
-	while (line[start + index] != '\0' && check_delimeters(line[start + index]) == 0 && \
-			line[start +index] != '"' && line[start +index] != '\'')
+	while (line[start + index] != '\0' && \
+check_delimeters(line[start + index]) == 0 && \
+line[start + index] != '"' && line[start + index] != '\'')
 		index++;
 	key = ft_substr(line, start, index);
-	// fprintf(stderr, "key = %s\n", key);
 	if (!key)
 		return (printf("error in getkey\n"), NULL);
 	return (key);

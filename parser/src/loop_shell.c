@@ -6,11 +6,9 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/28 19:15:09 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/28 20:40:57 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "minishell.h"
 
@@ -19,7 +17,7 @@
 static void	ft_init_data(t_data *data);
 
 //global exit status is nodig voor signals
-volatile sig_atomic_t signal_received = 0;
+volatile sig_atomic_t	g_signal_received = 0;
 
 static void	ft_init_data(t_data *data)
 {
@@ -56,14 +54,13 @@ int	get_input(t_data *data)
 		return (-1);
 	data->head = tokenize_input(data, data->line);
 	data->current = data->head;
-	//print_tokenized_list(data);
 	free(data->line);
 	data->line = NULL;
 	return (0);
 }
 
 //main loop of te shell
-int		main_loop(t_data *data)
+int	main_loop(t_data *data)
 {
 	data->line = NULL;
 	data->head = NULL;
@@ -72,7 +69,7 @@ int		main_loop(t_data *data)
 	{
 		free(data->line);
 		ft_free_tokens(data->head, data);
-		signal_received = 0;
+		g_signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
 		if (data->sig == INTERACTIVE_INT)
@@ -104,8 +101,10 @@ int	execute_input(t_data *data)
 	if (data->head == NULL)
 		return (0);
 	if (handle_heredoc(data->head, data) < 0)
-		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head, data), -1);
+		return (ft_free_arr((void **)data->envp), \
+ft_free_tokens(data->head, data), -1);
 	if (ft_start_exec(data->head, data) < 0)
-		return (ft_free_arr((void **)data->envp), ft_free_tokens(data->head, data), -1);
+		return (ft_free_arr((void **)data->envp), \
+ft_free_tokens(data->head, data), -1);
 	return (0);
 }

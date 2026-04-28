@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:36:59 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/28 19:34:59 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/28 19:59:49 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,74 +32,16 @@ t_token	*make_new_token(char *value, t_token_type type)
 	token->type = type;
 	token->next = NULL;
 	token->filename = NULL;
-	//printf("token:%s\n", token->value);
-	return (token);	
-}
-
-// int		check_delimeters(char c)
-// {
-// 	if (c == '|' || c == '>' || c == '<' || c == ' ' || c == '\0')
-// 		return (1);
-// 	return (0);
-// }
-
-t_token	*if_quotes(t_data *d, char *line, int start)
-{
-	char	c_to_find;
-	int		index;
-	char	*value;
-
-	index = 0;
-	c_to_find = line[start];
-	if (line[start] != '\0')	
-		start++;
-	while (line[start + index] != '\0' && line[start + index] != c_to_find)
-		index++;
-	if (index == 0)
-	{
-		value = ft_strdup("");
-		d->index += start + 1;
-		return (make_new_token(value, WORD));
-	}
-	value = ft_substr(line, start, index);
-	d->index += index + start + 1;
-	return (make_new_token(value, WORD));
-}
-
-t_token *make_word_token_with_quotes(t_data *d, char *line, int start)
-{
-    char    *value;
-    int     read = 0;
-    int     write = 0;
-    int     len = 0;
-
-    while (line[start + len] && check_delimeters(line[start + len]) == 0)
-        len++;
-    value = ft_substr(line, start, len);
-    if (!value)
-        return (NULL);
-    while (value[read])
-    {
-        if (value[read] != '\'' && value[read] != '"')
-        {
-            value[write] = value[read];
-            write++;
-        }
-        read++;
-    }
-    value[write] = '\0';
-    d->index += len;
-    printf("Cleaned value: %s\n", value);
-    return (make_new_token(value, WORD));
+	return (token);
 }
 
 t_token	*if_word(t_data *d, int start, char *line)
-{	
+{
 	t_token	*token;
-	int		index;
+	int		i;
 	char	*value;
 
-	index = 0;
+	i = 0;
 	if (line[start] == '\'' || line[start] == '"')
 	{
 		if (line[start + 1] != line[start])
@@ -107,22 +49,21 @@ t_token	*if_word(t_data *d, int start, char *line)
 		else
 			return (make_word_token_with_quotes(d, line, start));
 	}
-	while (check_delimeters(line[index + start]) == 0 && line[index + start] != '\0' \
-			&& (line[index + start] != '\'' && line[index + start] != '"'))
-		index++;
-	value = ft_substr(line, start, index);
+	while (check_delimeters(line[i + start]) == 0 && line[i + start] != '\0' \
+&& (line[i + start] != '\'' && line[i + start] != '"'))
+		i++;
+	value = ft_substr(line, start, i);
 	if (!value)
 		return (printf("substr error"), NULL);
 	token = make_new_token(value, WORD);
-	// free(value);
-	d->index += index + start;
+	d->index += i + start;
 	return (token);
 }
 
 int	index_to_char(char	*str, char c)
 {
 	int	index;
-	
+
 	index = 0;
 	while (str[index] != '\0' && str[index] != c)
 		index++;
@@ -148,19 +89,21 @@ char	*get_file_name(char *line, int *index)
 	value = ft_substr(line, start, (*index));
 	if (!value)
 		return (NULL);
-	if (line[(*index)] != '\0' && (line[(*index + 1)] == '\'' || line[(*index + 1)] == '"'))
+	if (line[(*index)] != '\0' \
+&& (line[(*index + 1)] == '\'' || line[(*index + 1)] == '"'))
 		(*index) += 2;
 	return (value);
 }
 
-t_token *if_redirection(t_data *d, int start, char *line, t_token_type type)
+t_token	*if_redirection(t_data *d, int start, char *line, t_token_type type)
 {
 	int		index;
-	char 	*value;
+	char	*value;
 	t_token	*token;
 
 	index = 0;
-	while (check_delimeters(line[start]) == 1 && (line[start] != '\'' && line[start] != '"'))
+	while (check_delimeters(line[start]) == 1 \
+&& (line[start] != '\'' && line[start] != '"'))
 	{
 		start++;
 		if (line[start] == '\0')
@@ -169,7 +112,7 @@ t_token *if_redirection(t_data *d, int start, char *line, t_token_type type)
 			return (NULL);
 		}
 	}
-	if ((line[start] == '\'' || line[start] == '"') && type == HEREDOC_EXPANSION)
+	if ((line[start] == '\'' || line[start] == '"') && type == HEREDOC)
 	{
 		type = HEREDOC_NO_EXPANSION;
 	}
@@ -180,4 +123,3 @@ t_token *if_redirection(t_data *d, int start, char *line, t_token_type type)
 	d->index += index + start;
 	return (token);
 }
-
