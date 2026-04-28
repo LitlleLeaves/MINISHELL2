@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/22 20:49:57 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/28 19:08:24 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		check_closed_quotes(char *line)
 	int	double_check;
 	
 	index = 0;
+	double_check = 0;
+	single_check = 0;
 	while (line[index])
 	{
 		if (line[index] == '\'')

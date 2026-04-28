@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/24 14:57:32 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/28 19:15:09 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	main(int argc, char *argv[], char *envp[])
 
 int	get_input(t_data *data)
 {
+	if (check_closed_quotes(data->line))
+		return (printf("Error: unclosed quotes\n"), -1);
 	add_history(data->line);
 	check_expansions(data);
 	if (data->line == NULL)
@@ -73,11 +75,6 @@ int		main_loop(t_data *data)
 		signal_received = 0;
 		setup_signals(INTERACTIVE);
 		data->line = get_line(data);
-		if (check_closed_quotes(data->line))
-		{
-			printf("Error: unclosed quotes\n");
-			continue ;
-		}
 		if (data->sig == INTERACTIVE_INT)
 			continue ;
 		if (data->sig == INTERACTIVE_KILL)
