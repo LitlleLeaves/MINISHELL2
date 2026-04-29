@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 14:31:40 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 14:57:53 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_token	*make_word_token_with_quotes(t_data *d, char *line, int start)
 		read++;
 	}
 	value[write] = '\0';
-	d->index += len;
+	d->index += len + 1;
 	return (make_new_token(value, WORD));
 }
 
