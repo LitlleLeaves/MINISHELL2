@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:53:09 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 16:52:34 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:20:05 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,6 @@ void	ft_child_execute(t_exec_info *exec_info, t_data *data)
 	exit(128);
 }
 
-int	ft_build_arguments_array(t_exec_info *exec_info)
-{
-	int		i;
-	t_token	*curr;
-
-	i = 0;
-	exec_info->arguments = ft_calloc(exec_info->words + 1, sizeof(char *));
-	if (exec_info->arguments == NULL)
-		return (-1);
-	curr = exec_info->start;
-	while (curr != exec_info->end && curr != NULL)
-	{
-		if (curr->type == WORD)
-		{
-			exec_info->arguments[i] = ft_strdup(curr->value);
-			if (exec_info->arguments[i] == NULL)
-			{
-				return (ft_free_r((void **)exec_info->arguments, i), -1);
-			}
-			i++;
-		}
-		curr = curr->next;
-	}
-	return (1);
-}
-
 //start execution of the command
 int	ft_child_start_execute(t_exec_info *exec_info, t_data *data, int i)
 {
@@ -99,7 +73,7 @@ int	ft_child_start_execute(t_exec_info *exec_info, t_data *data, int i)
 	ft_build_arguments_array(exec_info);
 	if (ft_strncmp(exec_info->arguments[0], "./minishell", 12) == 0)
 		if (ft_increase_shlvl(data) < 0)
-				return (ft_free_arr((void **)exec_info->arguments), -2);
+			return (ft_free_arr((void **)exec_info->arguments), -2);
 	while (curr != exec_info->end && curr != NULL)
 	{
 		if (ft_apply_redirection(&exec_info->fd_in, \

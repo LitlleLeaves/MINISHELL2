@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 17:05:14 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:09:21 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:20:49 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,11 @@ char		*free_left(char **left);
 
 /*wait children.c*/
 int	ft_wait_all_children(t_data *data, int nmb_of_pipes);
+
+size_t  ft_strlcat(char *dst, const char *src, size_t size);
+size_t  ft_strlcpy(char *dst, const char *src, size_t size);
+
+/*arguments*/
+int	ft_build_arguments_array(t_exec_info *exec_info);
 
 #endif

@@ -1,23 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/29 17:13:59 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/29 17:16:02 by jjhurry          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
 #include "minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <signal.h>
-#include <string.h>
-#include <dirent.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <sys/ioctl.h>
-#include <termios.h>
-#include <termcap.h>
-#include <stdbool.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-
-// < infile< infile2.txt < infile3 wc <infile4 -l |  wc -l  | wc -l > outfile
-
 #endif

@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 16:50:25 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:16:51 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_no_word_redirection(t_token *head)
 /*parent process sets up pipes and pids,
 check for single builtin and executes it
 or then forks the children, and waits for them to finish*/
-int ft_start_exec(t_token *head, t_data *data)
+int	ft_start_exec(t_token *head, t_data *data)
 {
 	int	nmb_of_pipes;
 
@@ -130,6 +130,5 @@ int	ft_copy_envp(t_data *data, char **envp)
 		ft_change_env_key_value("SHLVL", "1", data);
 		data->level = 1;
 	}
-	
 	return (1);
 }
