@@ -6,14 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 12:55:38 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 16:56:43 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:22:49 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-size_t  ft_strlcat(char *dst, const char *src, size_t size);
-size_t  ft_strlcpy(char *dst, const char *src, size_t size);
 
 /*function that parses the x= part of the env variables
 and returns onlue the value part*/

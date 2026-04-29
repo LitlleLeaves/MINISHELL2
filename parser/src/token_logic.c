@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token_logic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 16:39:51 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 17:25:13 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 static int	index_over_char(char *str, char c);
 
 //loop door de string en maak de linked list van tokens
@@ -66,6 +67,7 @@ static int	index_over_char(char *str, char c)
 		index++;
 	return (index);
 }
+
 //bepaald met de delimeters welke token we maken
 t_token	*classify_and_make(t_data *d, char *line)
 {

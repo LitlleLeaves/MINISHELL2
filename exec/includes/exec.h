@@ -6,12 +6,13 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 17:13:59 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:16:02 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:23:31 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef EXEC_H
+# define EXEC_H
 
-#include "minishell.h"
+# include "minishell.h"
+
 #endif

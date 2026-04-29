@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:53:13 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 16:25:08 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 17:25:35 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*safe_readline(void)
 {
 	char	*line;
 	int		len;
+
 	if (!isatty(STDIN_FILENO))
 	{
 		line = get_next_line(STDIN_FILENO);
@@ -62,6 +63,7 @@ char	*safe_readline(void)
 		return (line);
 	}
 }
+
 int	get_input(t_data *data)
 {
 	if (check_closed_quotes(data->line))
