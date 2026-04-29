@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:53:13 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 16:07:20 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:25:08 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*safe_readline(void)
 {
 	char	*line;
 	int		len;
-
 	if (!isatty(STDIN_FILENO))
 	{
 		line = get_next_line(STDIN_FILENO);
@@ -62,4 +61,18 @@ char	*safe_readline(void)
 		rl_event_hook = NULL;
 		return (line);
 	}
+}
+int	get_input(t_data *data)
+{
+	if (check_closed_quotes(data->line))
+		return (printf("Error: unclosed quotes\n"), -1);
+	add_history(data->line);
+	check_expansions(data);
+	if (data->line == NULL)
+		return (-1);
+	data->head = tokenize_input(data, data->line);
+	data->current = data->head;
+	free(data->line);
+	data->line = NULL;
+	return (0);
 }
