@@ -1,0 +1,6 @@
+export home moet home vervangen met lege string
+
+echo -n -n- -n test  moet alle -n skippen tot niet -n
+
+expr bullshit $? + $?
+
