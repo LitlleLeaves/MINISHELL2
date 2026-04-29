@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 15:22:02 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:11:22 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,36 +28,6 @@ static void	ft_init_data(t_data *data)
 	data->exit_code = 0;
 }
 
-// static char	*stringify_enum(t_token_type token)
-// {
-// 	if (token == WORD)
-// 		return ("WORD");
-// 	if (token == PIPE)
-// 		return ("PIPE");
-// 	if (token == REDIR_OUT_APP)
-// 		return ("REDIR_OUT_APP");
-// 	if (token == REDIR_OUT_TRUNC)
-// 		return ("REDIR_OUT_TRUNC");
-// 	if (token == REDIR_IN)
-// 		return ("REDIR_IN");
-// 	if (token == HEREDOC)
-// 		return ("HEREDOC_EXPANSION");
-// 	if (token == HEREDOC_NO_EXPANSION)
-// 		return ("HEREDOC_NO_EXPANSION");
-// 	return (NULL);
-//}
-
-//static void	print_tokenized_list(t_data	*data)
-//{
-//	while (data->current != NULL)
-//	{
-//		if (data->current->value == NULL)
-//			data->current = data->current->next;
-//		 printf("%s %s\n", data->current->value, stringify_enum(data->current->type));
-//		data->current = data->current->next;
-//	}
-//}
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	data;
@@ -74,19 +44,12 @@ int	main(int argc, char *argv[], char *envp[])
 	return (0);
 }
 
-int	get_input(t_data *data)
+void	ft_shudown(t_data *data)
 {
-	if (check_closed_quotes(data->line))
-		return (printf("Error: unclosed quotes\n"), -1);
-	add_history(data->line);
-	check_expansions(data);
-	if (data->line == NULL)
-		return (-1);
-	data->head = tokenize_input(data, data->line);
-	data->current = data->head;
-	free(data->line);
-	data->line = NULL;
-	return (0);
+	ft_free_tokens(data->head, data);
+	ft_free_arr((void **)data->envp);
+	rl_clear_history();
+	exit(data->exit_code);
 }
 
 //main loop of te shell
@@ -107,21 +70,14 @@ int	main_loop(t_data *data)
 		if (data->sig == INTERACTIVE_KILL)
 			exit(0);
 		if (data->line && *data->line)
-		{
 			if (get_input(data) == -1)
 				continue ;
-		}
 		if (data->head == NULL)
 			continue ;
 		if (execute_input(data) == -1)
 			continue ;
 		if (data->shutdown != -1)
-		{
-			ft_free_tokens(data->head, data);
-			ft_free_arr((void **)data->envp);
-			rl_clear_history();
-			exit(data->exit_code);
-		}
+			ft_shudown(data);
 	}
 	return (0);
 }

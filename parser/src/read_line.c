@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:53:13 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/28 20:45:25 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:11:26 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,11 @@ char *safe_readline(void)
 {
 	char	*line;
 	int		len;
-	// if (!isatty(STDIN_FILENO)) //debug
-	// {
-	// 	fprintf(stderr, "NON-INTERACTIVE MODE\n");
-	// 	// ...
-	// }
-	// else
-	// 	fprintf(stderr, "INTERACTIVE MODE\n");
 	if (!isatty(STDIN_FILENO))
 	{
-		line = get_next_line(STDIN_FILENO); // reads from pipe directly
+		line = get_next_line(STDIN_FILENO);
 		if (line)
 		{
-			// remove trailing newline that gnl includes
 			len = ft_strlen(line);
 			if (len > 0 && line[len - 1] == '\n')
 				line[len - 1] = '\0';
@@ -69,4 +61,18 @@ char *safe_readline(void)
 		rl_event_hook = NULL;
 		return (line);
 	}
+}
+int	get_input(t_data *data)
+{
+	if (check_closed_quotes(data->line))
+		return (printf("Error: unclosed quotes\n"), -1);
+	add_history(data->line);
+	check_expansions(data);
+	if (data->line == NULL)
+		return (-1);
+	data->head = tokenize_input(data, data->line);
+	data->current = data->head;
+	free(data->line);
+	data->line = NULL;
+	return (0);
 }
