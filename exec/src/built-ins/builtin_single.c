@@ -6,11 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 14:28:04 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:46:52 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:53:05 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 #include <errno.h>
 #include <limits.h>
 
@@ -58,9 +58,7 @@ void	ft_builtin_single_exit(int words, char **arguments, t_data *data)
 	write(2, "exit\n", 5);
 	data->shutdown = 1;
 	if (words == 1)
-	{
-		data->exit_code = 0;
-	}
+		data->exit_code = data->exit_code;
 	else if (words == 3)
 	{
 		write(2, "Minishell: exit: too many arguments\n", 37);
