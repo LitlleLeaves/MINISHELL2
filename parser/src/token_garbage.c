@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_garbage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/28 19:58:31 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 12:06:17 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,22 @@ t_token	*tokenize_input(t_data *d, char *str)
 
 	current = NULL;
 	d->index = 0;
+	head = NULL;
 	while (str[d->index] != '\0')
 	{
 		start = d->index;
 		if (current == NULL)
 		{
 			current = classify_and_make(d, str + start);
+			if (current == NULL)
+				return (NULL);
 			head = current;
 		}
 		else
 		{
 			current->next = classify_and_make(d, str + start);
+			if (current->next == NULL)
+				return (ft_free_tokens(head, d), NULL);
 			current = current->next;
 		}
 	}

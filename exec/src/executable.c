@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executable.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/12 14:56:47 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 11:38:20 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executable.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/12 14:56:47 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/29 12:25:15 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include "exec.h"
+#include "minishell.h"
 
 char	*ft_exec_failure(t_data *data, char *executable, char **paths)
 {
@@ -69,18 +69,18 @@ char	*ft_decide_executable(char *command, t_data *data)
 //choose executable is a built in or regular executable, and execute it
 void	ft_check_builtins(t_exec_info *exec_info, t_data *data, char **args)
 {
-	if (ft_strncmp(args[0], "cd", 2) == 0)
+	if (ft_strncmp(args[0], "cd", 3) == 0)
 		ft_builtin_cd(exec_info, data, args);
-	else if (ft_strncmp(args[0], "export", 6) == 0)
+	else if (ft_strncmp(args[0], "export", 7) == 0)
 		ft_builtin_export(data, args);
-	else if (ft_strncmp(args[0], "unset", 5) == 0)
+	else if (ft_strncmp(args[0], "unset", 6) == 0)
 		ft_builtin_unset(data, args);
-	else if (ft_strncmp(args[0], "echo", 4) == 0)
+	else if (ft_strncmp(args[0], "echo", 5) == 0)
 		ft_builtin_echo(data, args);
-	else if (ft_strncmp(args[0], "exit", 4) == 0)
+	else if (ft_strncmp(args[0], "exit", 5) == 0)
 		ft_builtin_exit(exec_info, data, args);
-	else if (ft_strncmp(args[0], "env", 3) == 0)
+	else if (ft_strncmp(args[0], "env", 4) == 0)
 		ft_builtin_env(data, args);
-	else if (ft_strncmp(args[0], "pwd", 3) == 0)
+	else if (ft_strncmp(args[0], "pwd", 4) == 0)
 		ft_builtin_pwd(data, args);
 }

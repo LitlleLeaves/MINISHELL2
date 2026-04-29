@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:07:12 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:47:32 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 12:24:36 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ int	ft_count_single_words(t_token *head)
 //check to handle builtin or not
 int	ft_check_single_builtin(char **arguments)
 {
-	if (ft_strncmp(arguments[0], "cd", 2) == 0)
+	if (ft_strncmp(arguments[0], "cd", 3) == 0)
 		return (1);
-	else if (ft_strncmp(arguments[0], "echo", 4) == 0)
+	else if (ft_strncmp(arguments[0], "echo", 5) == 0)
 		return (2);
-	else if (ft_strncmp(arguments[0], "pwd", 3) == 0)
+	else if (ft_strncmp(arguments[0], "pwd", 4) == 0)
 		return (3);
-	else if (ft_strncmp(arguments[0], "export", 6) == 0)
+	else if (ft_strncmp(arguments[0], "export", 7) == 0)
 		return (4);
-	else if (ft_strncmp(arguments[0], "unset", 5) == 0)
+	else if (ft_strncmp(arguments[0], "unset", 6) == 0)
 		return (5);
-	else if (ft_strncmp(arguments[0], "env", 3) == 0)
+	else if (ft_strncmp(arguments[0], "env", 4) == 0)
 		return (6);
-	else if (ft_strncmp(arguments[0], "exit", 4) == 0)
+	else if (ft_strncmp(arguments[0], "exit", 5) == 0)
 		return (7);
 	else
 		return (0);
@@ -55,7 +55,7 @@ int	ft_execute_single_builtin(int words, char **arguments, t_data *data)
 {
 	if (ft_strncmp(arguments[0], "cd", 2) == 0)
 		return (ft_builtin_single_cd(words, arguments, data), 1);
-	else if (ft_strncmp(arguments[0], "echo", 4) == 0)
+	else if (ft_strncmp(arguments[0], "echo", 5) == 0)
 		return (ft_builtin_single_echo(arguments, data), 2);
 	else if (ft_strncmp(arguments[0], "pwd", 3) == 0)
 		return (ft_builtin_single_pwd(data), 3);
