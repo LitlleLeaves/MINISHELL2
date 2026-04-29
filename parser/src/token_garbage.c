@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_garbage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 12:06:17 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 15:25:42 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ t_token	*tokenize_input(t_data *d, char *str)
 	while (str[d->index] != '\0')
 	{
 		start = d->index;
+		while (str[start] == ' ' && str[start] != '\0')
+			start++;
+		if (str[start] == '\0')
+			return (head);
+		d->index = start;
 		if (current == NULL)
 		{
 			current = classify_and_make(d, str + start);
@@ -49,8 +54,6 @@ t_token	*classify_and_make(t_data *d, char *line)
 	int		index;
 
 	index = 0;
-	while (line[index] == ' ')
-		index++;
 	if (check_delimeters(line[index]) == 0)
 		return (if_word(d, index, line));
 	else if (line[index] == '|')
