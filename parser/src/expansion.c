@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 14:41:01 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:10:22 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	check_expansions(t_data *d)
 			while (d->line[index] != '\'' && d->line[index] != '\0')
 				index++;
 		}
-		while (d->line[index] == '$' && d->line[index + 1] != ' ' && d->line[index + 1] != '\0')
+		while (d->line[index] == '$' && d->line[index + 1] != ' ' && \
+d->line[index + 1] != '\0')
 		{
 			convert_expansions(d, index);
 		}

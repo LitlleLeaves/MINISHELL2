@@ -257,11 +257,12 @@ t_token *tokenize_input(t_data *d, char *str);
 t_token *if_redirection(t_data *d, int start, char *line, t_token_type type);
 t_token *if_word(t_data *d, int start, char *line);
 t_token *make_new_token(char *value, t_token_type type);
-t_token *if_quotes(t_data *d, char *line, int start);
-int		check_closed_quotes(char *line);
+t_token	*tokenize_loop(t_data *d, char *str, t_token *head, t_token *current);
 
 /*quotes*/
 t_token	*make_word_token_with_quotes(t_data *d, char *line, int start);
+t_token *if_quotes(t_data *d, char *line, int start);
+int		check_closed_quotes(char *line);
 
 /* misc */
 int index_to_char(char *str, char c);

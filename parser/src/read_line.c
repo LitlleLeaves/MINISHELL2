@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:53:13 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/28 20:45:25 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:07:20 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,16 @@ char	*get_line(t_data *data)
 	return (line);
 }
 
-char *safe_readline(void)
+char	*safe_readline(void)
 {
 	char	*line;
 	int		len;
-	// if (!isatty(STDIN_FILENO)) //debug
-	// {
-	// 	fprintf(stderr, "NON-INTERACTIVE MODE\n");
-	// 	// ...
-	// }
-	// else
-	// 	fprintf(stderr, "INTERACTIVE MODE\n");
+
 	if (!isatty(STDIN_FILENO))
 	{
-		line = get_next_line(STDIN_FILENO); // reads from pipe directly
+		line = get_next_line(STDIN_FILENO);
 		if (line)
 		{
-			// remove trailing newline that gnl includes
 			len = ft_strlen(line);
 			if (len > 0 && line[len - 1] == '\n')
 				line[len - 1] = '\0';

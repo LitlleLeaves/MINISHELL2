@@ -66,7 +66,7 @@ BUILTINS_SRC_FILES_E := \
 SRC_FILES_P := \
 	loop_shell.c \
 	token_funcs.c \
-	token_garbage.c \
+	token_logic.c \
 	expansion.c \
 	signal_funcs.c \
 	read_line.c \
