@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/02 14:04:24 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:31:49 by jjhurry          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   echo.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/04/02 14:04:24 by jjhurry       #+#    #+#                 */
+/*   Updated: 2026/04/29 20:53:25 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int	ft_check_echo_option(char **arguments)
 //echo funtion prints all words with spaces inbetween, no newline
 int	ft_echo_no_newline(char **arguments, int i)
 {
+	while (ft_strncmp(arguments[i], "-n", 3) == 0)
+	{
+		printf("arg = %s, i = %i\n", arguments[i], i);
+		i++;
+	}
 	while (arguments[i] != NULL && arguments[i + 1] != NULL)
 	{
 		printf("%s ", arguments[i]);
