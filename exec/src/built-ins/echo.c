@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/02 14:04:24 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/29 20:53:25 by jjhurry       ########   odam.nl         */
+/*   Updated: 2026/04/29 20:54:32 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_echo_no_newline(char **arguments, int i)
 {
 	while (ft_strncmp(arguments[i], "-n", 3) == 0)
 	{
-		printf("arg = %s, i = %i\n", arguments[i], i);
 		i++;
 	}
 	while (arguments[i] != NULL && arguments[i + 1] != NULL)
