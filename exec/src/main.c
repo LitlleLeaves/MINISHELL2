@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:14:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 15:23:28 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 16:50:25 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,12 @@ int	ft_copy_envp(t_data *data, char **envp)
 		j++;
 	}
 	shlvl = ft_getenv(data, "SHLVL");
+	data->level = ft_atoi(shlvl);
 	if (shlvl == NULL)
 	{
 		ft_change_env_key_value("SHLVL", "1", data);
 		data->level = 1;
 	}
+	
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:53:09 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 15:26:02 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 16:52:34 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	ft_increase_shlvl(t_data *data)
 {
 	char	*shlvl;
 
-	data->level++;
 	shlvl = ft_itoa(data->level + 1);
 	if (shlvl == NULL)
 		return (-1);
