@@ -19,6 +19,8 @@
 #include <limits.h>
 #include <stdbool.h>
 
+#define _GNU_SOURCE
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE  200
 # endif
