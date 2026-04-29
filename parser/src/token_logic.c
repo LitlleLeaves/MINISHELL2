@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:17:09 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 16:28:29 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:39:51 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*tokenize_loop(t_data *d, char *str, t_token *head, t_token *current)
 	while (str[d->index] != '\0')
 	{
 		start = d->index;
-		start = index_over_char(str, ' ');
+		start += index_over_char(str + start, ' ');
 		if (str[start] == '\0')
 			return (head);
 		d->index = start;

@@ -114,8 +114,8 @@ typedef struct s_data
 //main.c
 int	main(int argc, char *argv[], char *envp[]);
 int		main_loop(t_data *data);
-int	_input(t_data *data);
-int	execute_input(t_data *getdata);
+int	get_input(t_data *data);
+int	execute_input(t_data *data);
 
 int ft_start_exec(t_token *head, t_data *data);
 

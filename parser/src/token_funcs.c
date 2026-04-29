@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:36:59 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 16:19:30 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:35:12 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	index_to_char(char	*str, char c)
 	int	index;
 
 	index = 0;
-	while (str[index] != '\0' && str[index] != c)
+	while (str[index] != '\0' && str[index] == c)
 		index++;
 	return (index);
 }
