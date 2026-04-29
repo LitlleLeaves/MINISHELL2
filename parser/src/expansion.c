@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 16:10:22 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 17:04:30 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h" 
+
+size_t  ft_strlcat(char *dst, const char *src, size_t size);
+size_t  ft_strlcpy(char *dst, const char *src, size_t size);
+bool    convert_expansions(t_data *d, int start);
+bool    replace_key_in_line(t_data *d, char *value, int start, int key_len);
 
 void	check_expansions(t_data *d)
 {

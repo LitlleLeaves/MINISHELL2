@@ -6,11 +6,14 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:31:15 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:36:15 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 16:57:00 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+size_t  ft_strlcat(char *dst, const char *src, size_t size);
+size_t  ft_strlcpy(char *dst, const char *src, size_t size);
 
 static int	ft_export_valid_char(char c)
 {

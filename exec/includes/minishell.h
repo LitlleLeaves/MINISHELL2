@@ -19,6 +19,7 @@
 #include <limits.h>
 #include <stdbool.h>
 
+
 #define _GNU_SOURCE
 
 # ifndef BUFFER_SIZE
@@ -56,8 +57,6 @@ typedef enum	e_sig_kind
 	INTERACTIVE_KILL,
 	NOTHING,
 }               t_sig_kind;
-
-
 
 /* Backwards-compat aliases used across the codebase */
 #define REDIR_OUT_TRUNCT REDIR_OUT_TRUNC
@@ -218,8 +217,7 @@ int ft_change_env_key_value(char *key, char *value, t_data *data);
 int ft_change_env_key(char *entry, t_data *data);
 
 /* ft_strl* helpers */
-size_t  ft_strlcat(char *dst, const char *src, size_t size);
-size_t  ft_strlcpy(char *dst, const char *src, size_t size);
+
 
 /* export/unset/echo */
 int ft_add_to_export_list(char **arguments, t_data *data);
@@ -242,45 +240,9 @@ void ft_close_heredoc_fds(t_token *head);
 
 /* expansions (parser + exec) */
 void	check_expansions(t_data *d);
-bool    convert_expansions(t_data *d, int start);
+
 char    *get_key(char *line, int start);
-bool    replace_key_in_line(t_data *d, char *value, int start, int key_len);
-bool	remove_quotes_from_empty_key(t_data *d, int start);
 
-/* readline tering zooi wat enn kk functie*/
-char    *get_line(t_data *data);
-char	*safe_readline(void);
-
-/* tokenization helpers */
-t_token *classify_and_make(t_data *d, char *line);
-t_token *tokenize_input(t_data *d, char *str);
-t_token *if_redirection(t_data *d, int start, char *line, t_token_type type);
-t_token *if_word(t_data *d, int start, char *line);
-t_token *make_new_token(char *value, t_token_type type);
-t_token	*tokenize_loop(t_data *d, char *str, t_token *head, t_token *current);
-
-/*quotes*/
-t_token	*make_word_token_with_quotes(t_data *d, char *line, int start);
-t_token *if_quotes(t_data *d, char *line, int start);
-int		check_closed_quotes(char *line);
-
-/* misc */
-int index_to_char(char *str, char c);
-
-/* signals*/
-void	setup_signals(t_sig_status	type);
-int		heredoc_signal_hook(void);
-int		interactive_signal_hook(void);
-
-size_t		ft_strlen(const char *str);
-char		*get_next_line(int fd);
-char		*ft_strchr(const char *str, int c);
-void		*ft_calloc(size_t nmemb, size_t size);
-char		*free_left(char **left);
-char		*free_left(char **left);
-
-/*wait children.c*/
-int	ft_wait_all_children(t_data *data, int nmb_of_pipes);
-
+#include "minishell_2.h"
 
 #endif
