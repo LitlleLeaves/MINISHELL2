@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   quote_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/28 20:41:30 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:50:36 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	update_quote_count(int check)
+{
+	if (check == 1)
+		return (0);
+	else
+		return (1);
+}
 
 int	check_closed_quotes(char *line)
 {
@@ -32,14 +40,6 @@ int	check_closed_quotes(char *line)
 	if (double_check == 1 || single_check == 1)
 		return (-1);
 	return (0);
-}
-
-static int	update_quote_count(int check)
-{
-	if (check == 1)
-		return (0);
-	else
-		return (1);
 }
 
 t_token	*make_word_token_with_quotes(t_data *d, char *line, int start)

@@ -258,6 +258,9 @@ t_token *make_new_token(char *value, t_token_type type);
 t_token *if_quotes(t_data *d, char *line, int start);
 int		check_closed_quotes(char *line);
 
+/*quotes*/
+t_token	*make_word_token_with_quotes(t_data *d, char *line, int start);
+
 /* misc */
 int index_to_char(char *str, char c);
 
