@@ -6,11 +6,10 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:56:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 12:25:15 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 12:30:33 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
 #include "minishell.h"
 
 char	*ft_exec_failure(t_data *data, char *executable, char **paths)
