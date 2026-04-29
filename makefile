@@ -26,7 +26,6 @@ LDLIBS := -lreadline -lhistory
 # exec sources
 SRC_FILES_E := \
 	child.c \
-	dummy.c \
 	env_list.c \
 	executable.c \
 	ft_exitcode_atol.c \
@@ -39,14 +38,14 @@ SRC_FILES_E := \
 	main.c \
 	pipes.c \
 	redirection.c \
-	test.c \
 	free.c \
 	ft_itoa.c \
 	heredoc.c \
 	get_next_line.c \
 	gnlhelper.c \
 	executable_relative.c \
-	wait_child.c
+	wait_child.c \
+	arguments.c
 
 # builtins sources
 BUILTINS_SRC_FILES_E := \
