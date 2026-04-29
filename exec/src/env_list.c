@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   env_list.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 12:55:38 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:22:49 by jjhurry          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   env_list.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/31 12:55:38 by jjhurry       #+#    #+#                 */
+/*   Updated: 2026/04/29 20:59:01 by jjhurry       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,9 @@ int	ft_change_env_key(char *entry, t_data *data)
 && (data->envp[i][ft_strlen(entry)] == '=' \
 || data->envp[i][ft_strlen(entry)] == '\0'))
 		{
-			return (free(entry), 1);
+			free(data->envp[i]);
+			data->envp[i] = entry;
+			return (1);
 		}
 		i++;
 	}
