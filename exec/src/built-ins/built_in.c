@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:29:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:46:41 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:53:18 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_builtin_exit(t_exec_info *exec_info, t_data *data, char **arguments)
 	data->shutdown = 1;
 	if (exec_info->words == 1)
 	{
-		data->exit_code = 0;
+		data->exit_code = data->exit_code;
 	}
 	else if (exec_info->words == 3)
 	{

@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:56:47 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 12:30:33 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 18:02:55 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_decide_executable(char *command, t_data *data)
 {
 	char	*executable;
 
-	if (ft_strchr(command, '/') == NULL)
+	if (ft_strchr(command, '/') == NULL && ft_getenv(data, "PATH") != NULL)
 		executable = ft_make_executable(command, data);
 	else
 		executable = ft_relative_executable(command);

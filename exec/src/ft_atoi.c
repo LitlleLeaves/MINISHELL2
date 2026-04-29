@@ -6,13 +6,13 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 14:33:55 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:16:30 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 17:39:03 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int static	ft_atoi_help(const char *ptr)
+static int	ft_atoi_help(const char *ptr)
 {
 	int	number;
 
