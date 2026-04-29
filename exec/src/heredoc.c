@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 11:46:44 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/29 18:06:50 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_heredoc_create_file(t_token *curr, t_data *data)
 void	ft_heredoc_sig(t_data *data, t_token *curr, char *line)
 {
 	g_signal_received = 0;
+	data->exit_code = 130;
 	setup_signals(INTERACTIVE);
 	close(curr->heredoc_fd);
 	data->sig = HEREDOC_INT;

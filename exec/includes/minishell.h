@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 17:05:14 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:36:52 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 17:52:19 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "minishell1.h"
-bool	remove_quotes_from_empty_key(t_data *d, int start);
 
 /* readline tering zooi wat een functie*/
 char	*get_line(t_data *data);
