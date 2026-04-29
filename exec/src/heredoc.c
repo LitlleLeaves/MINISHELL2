@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/28 20:39:44 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:46:44 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	ft_heredoc_parsing(t_token *curr, t_data *data)
 	line = NULL;
 	if (ft_heredoc_create_file(curr, data) < 0)
 		return (-1);
-	setup_signals(HEREDOC);
+	setup_signals(HEREDOC_SIG);
 	rl_event_hook = heredoc_signal_hook;
 	ft_heredoc_parsing_loop(line, data, curr);
 	line = NULL;

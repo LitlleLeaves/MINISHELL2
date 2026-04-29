@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_funcs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:06:58 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/28 20:47:02 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:47:10 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	setup_signals(t_sig_status	type)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 	}
-	if (type == HEREDOC || type == INTERACTIVE)
+	if (type == HEREDOC_SIG || type == INTERACTIVE)
 	{
-		if (type == HEREDOC)
+		if (type == HEREDOC_SIG)
 			sa.sa_handler = heredoc_handler;
 		if (type == INTERACTIVE)
 			sa.sa_handler = interactive_handler;

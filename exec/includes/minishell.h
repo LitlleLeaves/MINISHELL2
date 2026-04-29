@@ -31,7 +31,7 @@ typedef enum e_sig_status
 	NON_INTERACTIVE, //tijdes execute
 	IGNORE, //als je parent word moet je sigint en sigquit negeren
 	CHILD, //ergens in the child code moet dit gedefineerd worde
-	HEREDOC //heredoc werkt bijna t zelfde als interactive maar geeft een bepaalde exit code (130)
+	HEREDOC_SIG //heredoc werkt bijna t zelfde als interactive maar geeft een bepaalde exit code (130)
 }			t_sig_status;
 
 typedef enum	e_token_type
