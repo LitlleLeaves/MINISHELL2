@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/30 12:45:03 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 14:43:32 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_token	*make_word_with_quote_helper(t_data *d, int len, char *value, \
 char *line)
 {
-	if (line [d->index + len] == '\0')
+	if (line[d->index + len] == '\0')
 	{
 		d->index += len;
 		return (make_new_token(value, WORD));
@@ -55,7 +55,7 @@ int	check_closed_quotes(char *line)
 	return (0);
 }
 
-t_token	*make_word_token_with_quotes(t_data *d, char *line, int start)
+t_token	*make_word_token_with_quotes(t_data *d, char *line)
 {
 	char	*value;
 	int		read;
@@ -65,9 +65,9 @@ t_token	*make_word_token_with_quotes(t_data *d, char *line, int start)
 	read = 0;
 	write = 0;
 	len = 0;
-	while (line[start + len] && check_delimeters(line[start + len]) == 0)
+	while (line[len] && check_delimeters(line[len]) == 0)
 		len++;
-	value = ft_substr(line, start, len);
+	value = ft_substr(line, 0, len);
 	if (!value)
 		return (NULL);
 	while (value[read])
@@ -80,7 +80,7 @@ t_token	*make_word_token_with_quotes(t_data *d, char *line, int start)
 		read++;
 	}
 	value[write] = '\0';
-	return (make_word_with_quote_helper(d, len, value, line));
+	return (make_word_with_quote_helper(d, read, value, line));
 }
 
 t_token	*if_quotes(t_data *d, char *line, int start)

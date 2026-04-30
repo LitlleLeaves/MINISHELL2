@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 17:05:14 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/30 12:45:24 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 14:38:11 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_token	*make_new_token(char *value, t_token_type type);
 t_token	*tokenize_loop(t_data *d, char *str, t_token *head, t_token *current);
 
 /*quotes*/
-t_token	*make_word_token_with_quotes(t_data *d, char *line, int start);
+t_token	*make_word_token_with_quotes(t_data *d, char *line);
 t_token	*if_quotes(t_data *d, char *line, int start);
 int		check_closed_quotes(char *line);
 
