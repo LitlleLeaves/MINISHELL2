@@ -6,12 +6,12 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:27:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:34:14 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:00:58 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include <errno.h>
+#include "minishell.h"
+
 /*helper funtion that sets the env variable OLDPWD and PWD
  to the actual new values
 */

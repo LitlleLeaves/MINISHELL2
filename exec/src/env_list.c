@@ -6,11 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 12:55:38 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:22:49 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:05:10 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 /*function that parses the x= part of the env variables
 and returns onlue the value part*/
@@ -98,7 +98,8 @@ int	ft_change_env_key(char *entry, t_data *data)
 && (data->envp[i][ft_strlen(entry)] == '=' \
 || data->envp[i][ft_strlen(entry)] == '\0'))
 		{
-			return (free(entry), 1);
+			free(entry);
+			return (1);
 		}
 		i++;
 	}

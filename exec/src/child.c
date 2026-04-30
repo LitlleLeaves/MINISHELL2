@@ -6,12 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:53:09 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:20:05 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:01:25 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include <errno.h>
+#include "minishell.h"
 
 // //handle execution failure, free arguments and exit with status 127
 // void	ft_execution_failure(char *executable, char **arguments)

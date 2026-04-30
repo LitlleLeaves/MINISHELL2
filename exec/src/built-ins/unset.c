@@ -6,11 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 13:22:09 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:40:13 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:01:19 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 void	ft_unset_helper(t_data *data, int j)
 {

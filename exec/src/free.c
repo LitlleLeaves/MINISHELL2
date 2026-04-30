@@ -6,12 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 11:52:21 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:41:31 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:01:32 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "exec.h"
+#include "minishell.h"
 
 //free array that is null terminated
 void	ft_free_arr(void **array)

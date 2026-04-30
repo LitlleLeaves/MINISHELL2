@@ -6,11 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 14:04:24 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:31:49 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:01:02 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 // exho with no arguments
 int	ft_echo_no_arguments(void)
@@ -30,6 +30,10 @@ int	ft_check_echo_option(char **arguments)
 //echo funtion prints all words with spaces inbetween, no newline
 int	ft_echo_no_newline(char **arguments, int i)
 {
+	while (ft_strncmp(arguments[i], "-n", 3) == 0)
+	{
+		i++;
+	}
 	while (arguments[i] != NULL && arguments[i + 1] != NULL)
 	{
 		printf("%s ", arguments[i]);

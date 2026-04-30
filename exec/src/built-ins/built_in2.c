@@ -6,11 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:29:24 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:47:02 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:00:43 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 void	ft_builtin_env(t_data *data, char **arguments)
 {
