@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 17:24:41 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:29:12 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ bool	replace_key_in_line(t_data *d, char *value, int start, int key_len)
 
 	old_length = ft_strlen(d->line);
 	val_len = ft_strlen(value);
-	total_len = (val_len - key_len) - 1 + old_length;
+	total_len = (val_len - key_len) + old_length;
 	new = malloc(total_len + 1);
 	if (!new)
 		return (false);
