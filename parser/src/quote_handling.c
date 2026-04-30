@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/30 14:43:32 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 15:58:50 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,29 @@ t_token	*make_word_token_with_quotes(t_data *d, char *line)
 	int		read;
 	int		write;
 	int		len;
+	bool	in_quote;
 
+	in_quote = false;
 	read = 0;
 	write = 0;
 	len = 0;
 	while (line[len] && check_delimeters(line[len]) == 0)
 		len++;
-	value = ft_substr(line, 0, len);
+	value = ft_substr(line, 0, len + 1);
 	if (!value)
 		return (NULL);
 	while (value[read])
 	{
-		if (value[read] != '\'' && value[read] != '"')
+		if (((value[read] == '\'' || value[read] == '"')) && in_quote == true)
 		{
-			value[write] = value[read];
-			write++;
-		}
-		read++;
+			read++;
+			if (in_quote == true)
+				in_quote = false;
+			else
+				in_quote = true;
+		}		
+		else
+			value[write++] = value[read++];
 	}
 	value[write] = '\0';
 	return (make_word_with_quote_helper(d, read, value, line));
