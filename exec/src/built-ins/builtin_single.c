@@ -6,13 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 14:28:04 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:53:05 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:00:48 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <errno.h>
-#include <limits.h>
 
 void	ft_builtin_single_cd(int words, char **arguments, t_data *data)
 {

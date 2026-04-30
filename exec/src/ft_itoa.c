@@ -6,11 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:01:04 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:13:07 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:01:40 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 static int	ft_number_length(long n)
 {

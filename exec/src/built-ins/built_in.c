@@ -6,11 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:29:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 17:53:18 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:00:37 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 void	ft_builtin_cd(t_exec_info *exec_info, t_data *data, char **arguments)
 {

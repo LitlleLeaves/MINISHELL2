@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/29 18:06:50 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 12:02:36 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 #include <stdint.h>
-#include <stdio.h>
+
 
 int	ft_heredoc_create_file(t_token *curr, t_data *data)
 {

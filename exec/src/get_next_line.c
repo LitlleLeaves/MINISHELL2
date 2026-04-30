@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <limits.h>
 
 //sets n addresses to 0 starting at str
 void	ft_bzero(char	*str)

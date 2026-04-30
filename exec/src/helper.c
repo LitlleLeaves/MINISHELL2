@@ -6,13 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:02:36 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/24 12:40:50 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:02:02 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include <stdlib.h>
-#include <limits.h>
+#include "minishell.h"
 
 //allocate nmemb amount of data of size size
 void	*ft_calloc(size_t nmemb, size_t size)

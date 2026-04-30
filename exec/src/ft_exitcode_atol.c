@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_atol.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jjhurry <jjhurry@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/04/03 16:36:33 by jjhurry       #+#    #+#                 */
-/*   Updated: 2026/04/23 10:58:36 by jjhurry       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_exitcode_atol.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/03 16:36:33 by jjhurry           #+#    #+#             */
+/*   Updated: 2026/04/30 12:01:38 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include <limits.h>
+#include "minishell.h"
 
 static long	ft_atol_help(const char *ptr, int sign)
 {

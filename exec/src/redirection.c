@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 12:04:50 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/28 19:58:28 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 12:02:54 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include <errno.h>
-#include <unistd.h>
+#include "minishell.h"
 
 //infile regular
 int	ft_handle_in(int *fd_in, t_token *curr)
