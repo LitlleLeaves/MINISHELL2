@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 17:05:14 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/30 14:38:11 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 17:12:01 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define MINISHELL_H
 
 # include "minishell1.h"
+
+typedef enum e_quote_state
+{
+	NO_QUOTES,
+	IN_DOUBLE,
+	IN_SINGLE,
+}	t_quote_state;
 
 /* readline tering zooi wat een functie*/
 char	*get_line(t_data *data);

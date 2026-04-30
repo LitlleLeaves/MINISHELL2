@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/30 15:58:50 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 19:30:58 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,53 +61,42 @@ t_token	*make_word_token_with_quotes(t_data *d, char *line)
 	int		read;
 	int		write;
 	int		len;
-	bool	in_quote;
+	char	quote_char;
+	char    qc;
 
-	in_quote = false;
+	quote_char = 0;
 	read = 0;
 	write = 0;
+	qc = 0;
 	len = 0;
-	while (line[len] && check_delimeters(line[len]) == 0)
-		len++;
-	value = ft_substr(line, 0, len + 1);
+	while (line[len])
+	{
+	    if ((line[len] == '\'' || line[len] == '"') && qc == 0)
+	        qc = line[len];
+	    else if (line[len] == qc)
+	        qc = 0;
+	    else if (qc == 0 && check_delimeters(line[len]))
+	        break;
+	    len++;
+	}
+	value = ft_substr(line, 0, len);
 	if (!value)
 		return (NULL);
 	while (value[read])
 	{
-		if (((value[read] == '\'' || value[read] == '"')) && in_quote == true)
+		if ((value[read] == '\'' || value[read] == '"'))
 		{
-			read++;
-			if (in_quote == true)
-				in_quote = false;
-			else
-				in_quote = true;
-		}		
-		else
-			value[write++] = value[read++];
+    	    if (quote_char == 0)
+    	        quote_char = value[read];
+    	    else if (quote_char == value[read])
+        	    quote_char = 0;
+    	    else
+    	        value[write++] = value[read];
+    	    read++;
+	    }
+	    else
+    	    value[write++] = value[read++];
 	}
 	value[write] = '\0';
 	return (make_word_with_quote_helper(d, read, value, line));
-}
-
-t_token	*if_quotes(t_data *d, char *line, int start)
-{
-	char	c_to_find;
-	int		index;
-	char	*value;
-
-	index = 0;
-	c_to_find = line[start];
-	if (line[start] != '\0')
-		start++;
-	while (line[start + index] != '\0' && line[start + index] != c_to_find)
-		index++;
-	if (index == 0)
-	{
-		value = ft_strdup("");
-		d->index += start + 1;
-		return (make_new_token(value, WORD));
-	}
-	value = ft_substr(line, start, index);
-	d->index += index + start + 1;
-	return (make_new_token(value, WORD));
 }

@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:36:59 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/30 14:37:49 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 18:07:46 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,11 @@ t_token	*if_word(t_data *d, int start, char *line)
 
 	i = 0;
 	if (line[start] == '\'' || line[start] == '"')
-	{
-		if (line[start + 1] != line[start])
-			return (if_quotes(d, line, start));
-		else
-			return (make_word_token_with_quotes(d, line));
-	}
+		return (make_word_token_with_quotes(d, line));
 	while (check_delimeters(line[i + start]) == 0 && line[i + start] != '\0' \
 && (line[i + start] != '\'' && line[i + start] != '"'))
 		i++;
-	if ((line[i + start] == '\'' || line[i + start] == '"') && \
-line[i + start] == line[i + start + 1])
+	if ((line[i + start] == '\'' || line[i + start] == '"'))
 		return (make_word_token_with_quotes(d, line));
 	value = ft_substr(line, start, i);
 	if (!value)
