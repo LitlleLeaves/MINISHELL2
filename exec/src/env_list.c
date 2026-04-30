@@ -6,11 +6,11 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 12:55:38 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/30 11:56:11 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:05:10 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 /*function that parses the x= part of the env variables
 and returns onlue the value part*/

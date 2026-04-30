@@ -1,4 +1,4 @@
-export home moet home vervangen met lege string
+export home moet home vervangen met lege string , volgens mij is onze versie wel goed
 
 expr bullshit $? + $?
 

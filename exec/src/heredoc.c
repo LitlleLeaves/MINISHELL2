@@ -6,13 +6,12 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:53:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/30 12:02:36 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 12:04:53 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stdint.h>
-
 
 int	ft_heredoc_create_file(t_token *curr, t_data *data)
 {
