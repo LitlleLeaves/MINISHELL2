@@ -6,11 +6,24 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 15:05:50 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/04/30 12:45:03 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_token	*make_word_with_quote_helper(t_data *d, int len, char *value, \
+char *line)
+{
+	if (line [d->index + len] == '\0')
+	{
+		d->index += len;
+		return (make_new_token(value, WORD));
+	}
+	else
+		d->index += len + 1;
+	return (make_new_token(value, WORD));
+}
 
 static int	update_quote_count(int check)
 {
@@ -67,8 +80,7 @@ t_token	*make_word_token_with_quotes(t_data *d, char *line, int start)
 		read++;
 	}
 	value[write] = '\0';
-	d->index += len + 1;
-	return (make_new_token(value, WORD));
+	return (make_word_with_quote_helper(d, len, value, line));
 }
 
 t_token	*if_quotes(t_data *d, char *line, int start)
