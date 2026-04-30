@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:29:13 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/30 12:00:37 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 14:12:14 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_builtin_exit(t_exec_info *exec_info, t_data *data, char **arguments)
 	{
 		data->exit_code = data->exit_code;
 	}
-	else if (exec_info->words == 3)
+	else if (exec_info->words >= 3)
 	{
 		write(2, "Minishell: exit: too many arguments\n", 37);
 		data->exit_code = 1;

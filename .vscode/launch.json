@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "minishell",
+            "name": "Debug Minishell",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/minishell",
@@ -10,7 +10,52 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": false,
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set disassembly flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+        },
+        {
+            "name": "Debug Minishell (attach)",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "${workspaceFolder}/minishell",
+            "processId": "${command:pickProcess}",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug Minishell (valgrind)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/usr/bin/valgrind",
+            "args": [
+                "--leak-check=full",
+                "--track-origins=yes",
+                "--show-leak-kinds=definite",
+                "${workspaceFolder}/minishell"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
             "MIMode": "gdb"
         }
     ]

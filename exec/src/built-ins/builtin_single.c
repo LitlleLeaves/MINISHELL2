@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 14:28:04 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/30 12:00:48 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/04/30 13:54:08 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ void	ft_builtin_single_echo(char **arguments, t_data *data)
 void	ft_builtin_single_exit(int words, char **arguments, t_data *data)
 {
 	write(2, "exit\n", 5);
-	data->shutdown = 1;
-	if (words == 1)
-		data->exit_code = data->exit_code;
-	else if (words == 3)
+	if (words >= 3)
 	{
 		write(2, "Minishell: exit: too many arguments\n", 37);
 		data->exit_code = 1;
+		return ;
 	}
+	else if (words == 1)
+		data->exit_code = data->exit_code;
 	else
 	{
 		data->exit_code = ft_exit_code_atol(arguments[1]);
@@ -73,4 +73,5 @@ void	ft_builtin_single_exit(int words, char **arguments, t_data *data)
 			write (2, ": numeric argument required\n", 29);
 		}
 	}
+	data->shutdown = 1;
 }
