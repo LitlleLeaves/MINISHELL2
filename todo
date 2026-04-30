@@ -1,4 +1,3 @@
-export home moet home vervangen met lege string , volgens mij is onze versie wel goed
+ctrl + \ wanneer getyp is moet stoppen maar doet niks
 
-expr bullshit $? + $?
 
