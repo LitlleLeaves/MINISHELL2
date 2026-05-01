@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/05/01 12:37:24 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/05/01 13:39:34 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 static t_token	*make_word_with_quote_helper(t_data *d, int len, char *value, \
 char *line)
 {
-	// printf("index=%i, len=%i, line=%s\n", d->index, len, line); // debug
-	// printf("line[d->index]=%c line[len]=%c\n", line[d->index], line[len]); // debug
-	// if (line[d->index + len] == '\0') \\ original
 	if (line[len] == '\0')
 	{
 		d->index += len;
