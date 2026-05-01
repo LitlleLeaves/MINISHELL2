@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 20:36:30 by side-lan          #+#    #+#             */
-/*   Updated: 2026/05/01 12:37:24 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/05/01 13:39:31 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 static t_token	*make_word_with_quote_helper(t_data *d, int len, char *value, \
 char *line)
 {
-	// printf("index=%i, len=%i, line=%s\n", d->index, len, line); // debug
-	// printf("line[d->index]=%c line[len]=%c\n", line[d->index], line[len]); // debug
-	// if (line[d->index + len] == '\0') \\ original
 	if (line[len] == '\0')
 	{
 		d->index += len;
@@ -26,36 +23,6 @@ char *line)
 	else
 		d->index += len + 1;
 	return (make_new_token(value, WORD));
-}
-
-static int	update_quote_count(int check)
-{
-	if (check == 1)
-		return (0);
-	else
-		return (1);
-}
-
-int	check_closed_quotes(char *line)
-{
-	int	index;
-	int	single_check;
-	int	double_check;
-
-	index = 0;
-	double_check = 0;
-	single_check = 0;
-	while (line[index])
-	{
-		if (line[index] == '\'')
-			single_check = update_quote_count(single_check);
-		if (line[index] == '"')
-			double_check = update_quote_count(double_check);
-		index++;
-	}
-	if (double_check == 1 || single_check == 1)
-		return (-1);
-	return (0);
 }
 
 int	ft_make_word_quote_helper(char *value)

@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:23:46 by side-lan          #+#    #+#             */
-/*   Updated: 2026/05/01 12:35:31 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/05/01 13:46:30 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static bool	convert_expansion_helper(t_data *d, int start, \
+int key_length, char *value);
+
 void	check_expansions(t_data *d)
 {
-	//bool			in_quotes;
 	int				index;
-	t_quote_state	state;
 	char			find;
 
 	find = 0;
-	state = NO_QUOTES;
 	index = 0;
 	while (d->line[index] != '\0')
 	{
@@ -85,6 +85,12 @@ bool	convert_expansions(t_data *d, int start)
 	key_length = ft_strlen(key);
 	value = ft_getenv(d, key);
 	free(key);
+	return (convert_expansion_helper(d, start, key_length, value));
+}
+
+static bool	convert_expansion_helper(t_data *d, int start, \
+int key_length, char *value)
+{
 	if (!value)
 	{
 		if (replace_key_in_line(d, "", start, key_length) == false)

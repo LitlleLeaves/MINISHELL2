@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 17:05:14 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/05/01 12:42:19 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/05/01 13:40:48 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 # define MINISHELL_H
 
 # include "minishell1.h"
-
-typedef enum e_quote_state
-{
-	NO_QUOTES,
-	IN_DOUBLE,
-	IN_SINGLE,
-}	t_quote_state;
 
 /* readline tering zooi wat een functie*/
 char	*get_line(t_data *data);

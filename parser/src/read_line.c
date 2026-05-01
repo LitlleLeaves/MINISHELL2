@@ -6,7 +6,7 @@
 /*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:53:13 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/30 18:05:23 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/05/01 13:38:38 by side-lan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ char	*safe_readline(void)
 int	get_input(t_data *data)
 {
 	add_history(data->line);
-	//if (check_closed_quotes(data->line))
-	//	return (printf("Error: unclosed quotes\n"), -1);
 	check_expansions(data);
 	if (data->line == NULL)
 		return (-1);
