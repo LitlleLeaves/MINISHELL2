@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:36:59 by side-lan          #+#    #+#             */
-/*   Updated: 2026/05/01 13:36:59 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/05/01 13:38:06 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	index_to_char(char	*str, char c)
 	int	index;
 
 	index = 0;
-	while (str[index] != '\0' && str[index] == c)
+	while (str[index] != '\0' && str[index] != c)
 		index++;
 	return (index);
 }
@@ -89,6 +89,7 @@ char	*get_file_name(char *line, int *index)
 	if (line[(*index)] != '\0' \
 && (line[(*index + 1)] == '\'' || line[(*index + 1)] == '"'))
 		(*index) += 2;
+	printf("hopla%s\n", value);
 	return (value);
 }
 
