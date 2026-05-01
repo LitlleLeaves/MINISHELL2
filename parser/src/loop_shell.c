@@ -6,7 +6,7 @@
 /*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 20:30:48 by side-lan          #+#    #+#             */
-/*   Updated: 2026/04/29 16:11:22 by jjhurry          ###   ########.fr       */
+/*   Updated: 2026/05/01 12:41:58 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main_loop(t_data *data)
 		if (data->sig == INTERACTIVE_INT)
 			continue ;
 		if (data->sig == INTERACTIVE_KILL)
-			exit(0);
+			ft_mainloop_kill();
 		if (data->line && *data->line)
 			if (get_input(data) == -1)
 				continue ;
@@ -86,6 +86,7 @@ int	execute_input(t_data *data)
 {
 	if (data->head == NULL)
 		return (0);
+	free(data->line);
 	if (handle_heredoc(data->head, data) < 0)
 		return (ft_free_arr((void **)data->envp), \
 ft_free_tokens(data->head, data), -1);

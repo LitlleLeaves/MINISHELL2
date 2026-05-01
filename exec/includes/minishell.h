@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: side-lan <side-lan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jjhurry <jjhurry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 17:05:14 by jjhurry           #+#    #+#             */
-/*   Updated: 2026/04/30 17:12:01 by side-lan         ###   ########.fr       */
+/*   Updated: 2026/05/01 12:42:19 by jjhurry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		index_to_char(char *str, char c);
 void	setup_signals(t_sig_status	type);
 int		heredoc_signal_hook(void);
 int		interactive_signal_hook(void);
+void	ft_mainloop_kill(void);
 
 size_t	ft_strlen(const char *str);
 char	*get_next_line(int fd);

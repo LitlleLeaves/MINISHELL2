@@ -68,6 +68,7 @@ SRC_FILES_P := \
 	token_logic.c \
 	expansion.c \
 	signal_funcs.c \
+	signal_functs_2.c \
 	read_line.c \
 	quote_handling.c
 
